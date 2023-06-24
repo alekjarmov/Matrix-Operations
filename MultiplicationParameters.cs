@@ -15,11 +15,40 @@ namespace MatrixOperations
         public MultiplicationParameters()
         {
             InitializeComponent();
+            var inputs = new NumericUpDown[] { XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix };
+
+            foreach (var input in inputs)
+            {
+                input.Minimum = 1;
+                input.Value = 1;
+            }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void labelMultiplictationDimensions_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void XFirstMatrix_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void YFirstMatrix_ValueChanged(object sender, EventArgs e)
+        {
+            XSecondMatrix.Value = YFirstMatrix.Value;
+
+        }
+
+        private void XSecondMatrix_ValueChanged(object sender, EventArgs e)
+        {
+            YFirstMatrix.Value = XSecondMatrix.Value;
         }
     }
 }
