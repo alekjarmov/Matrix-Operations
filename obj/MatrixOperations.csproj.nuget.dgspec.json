@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alek\\source\\repos\\MatrixOperations\\MatrixOperations.csproj": {}
+    "C:\\Users\\AnaMarija Atanasoska\\Desktop\\Faks\\Semestar 6\\Vizuelno programiranje\\proekt\\Matrix-Operations\\MatrixOperations.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alek\\source\\repos\\MatrixOperations\\MatrixOperations.csproj": {
+    "C:\\Users\\AnaMarija Atanasoska\\Desktop\\Faks\\Semestar 6\\Vizuelno programiranje\\proekt\\Matrix-Operations\\MatrixOperations.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alek\\source\\repos\\MatrixOperations\\MatrixOperations.csproj",
+        "projectUniqueName": "C:\\Users\\AnaMarija Atanasoska\\Desktop\\Faks\\Semestar 6\\Vizuelno programiranje\\proekt\\Matrix-Operations\\MatrixOperations.csproj",
         "projectName": "MatrixOperations",
-        "projectPath": "C:\\Users\\Alek\\source\\repos\\MatrixOperations\\MatrixOperations.csproj",
-        "packagesPath": "C:\\Users\\Alek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alek\\source\\repos\\MatrixOperations\\obj\\",
+        "projectPath": "C:\\Users\\AnaMarija Atanasoska\\Desktop\\Faks\\Semestar 6\\Vizuelno programiranje\\proekt\\Matrix-Operations\\MatrixOperations.csproj",
+        "packagesPath": "C:\\Users\\AnaMarija Atanasoska\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AnaMarija Atanasoska\\Desktop\\Faks\\Semestar 6\\Vizuelno programiranje\\proekt\\Matrix-Operations\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "H:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Alek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\AnaMarija Atanasoska\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -62,7 +62,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
