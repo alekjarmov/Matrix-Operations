@@ -10,13 +10,15 @@ namespace MatrixOperations
 {
     public static class GeneratorMethods
     {
-        static int FixedMargin = 5;
-        static int FieldsPaddingX = 20;
-        static int FieldsPaddingY = 20;
-        static int MatrixDistance = 0;
+        public static int FixedMarginX = 5;
+        public static int FixedMarginY = 5;
+        public static int FieldsPaddingX = 20;
+        public static int FieldsPaddingY = 20;
+        public static int MatrixDistance = 20;
         private static NumericUpDown[,] GenerateMatrix(Form form, int X, int Y, 
                                     int MarginX,int MarginY,
-                                    int NumericUpDownsHeight, int NumericUpDownsWidth)
+                                    int NumericUpDownsWidth)
+                                    //int NumericUpDownsHeight, int NumericUpDownsWidth)
         {
             NumericUpDown[,] numericUpDowns = new NumericUpDown[X, Y];
 
@@ -25,15 +27,38 @@ namespace MatrixOperations
                 for (var j = 0; j < Y; j++)
                 {
                     numericUpDowns[i, j] = new NumericUpDown();
-                    numericUpDowns[i, j].Top = MarginY + i * (NumericUpDownsHeight + FieldsPaddingY);
+                    numericUpDowns[i, j].Top = MarginY + i * (numericUpDowns[i,j].Height + FieldsPaddingY);
                     numericUpDowns[i, j].Left = MarginX + j * (NumericUpDownsWidth + FieldsPaddingX);
                     numericUpDowns[i, j].Width = NumericUpDownsWidth;
-                    numericUpDowns[i, j].Height = NumericUpDownsHeight;
+                    //numericUpDowns[i, j].Height =  NumericUpDownsHeight;
                     form.Controls.Add(numericUpDowns[i, j]);
                 }
             }
 
             return numericUpDowns;
+        }
+        private static TextBox[,] GenerateResultingMatrix(Form form, int X, int Y,
+                                    int MarginX, int MarginY,
+                                    int TextBoxWidth)
+        //int NumericUpDownsHeight, int NumericUpDownsWidth)
+        {
+
+            TextBox[,] labels = new TextBox[X, Y];
+
+            for (var i = 0; i < X; i++)
+            {
+                for (var j = 0; j < Y; j++)
+                {
+                    labels[i, j] = new TextBox();
+                    labels[i, j].Top = MarginY + i * (labels[i, j].Height + FieldsPaddingY);
+                    labels[i, j].Left = MarginX + j * (TextBoxWidth + FieldsPaddingX);
+                    labels[i, j].Width = TextBoxWidth;
+                    //numericUpDowns[i, j].Height =  NumericUpDownsHeight;
+                    form.Controls.Add(labels[i, j]);
+                }
+            }
+
+            return labels;
         }
         private static (float, float, float) CalculateHeightPercentages(int YFirstMatrix, int YSecondMatrix)
         {
@@ -41,12 +66,12 @@ namespace MatrixOperations
             if (YFirstMatrix > YSecondMatrix)
             {
                 PercentsForFirstMatrixHeight = 1;
-                PercentsForSecondMatrixHeight = (float)YSecondMatrix / (float)(YFirstMatrix);
+                PercentsForSecondMatrixHeight = 1;//(float)YSecondMatrix / (float)(YFirstMatrix);
 
             }
             else
             {
-                PercentsForFirstMatrixHeight = (float)YFirstMatrix / (float)(YSecondMatrix);
+                PercentsForFirstMatrixHeight = 1;// (float)YFirstMatrix / (float)(YSecondMatrix);
                 PercentsForSecondMatrixHeight = 1;
             }
             PercentsForResultingMatrixHeight = PercentsForSecondMatrixHeight;
@@ -55,44 +80,60 @@ namespace MatrixOperations
         }
 
        
-        public static void GenerateTwoMatrices(this Form form, decimal XFirstMatrix, decimal YFirstMatrix, decimal XSecondMatrix, decimal YSecondMatrix)
+        public static void GenerateMatrices(this Form form, decimal XFirstMatrix, decimal YFirstMatrix, decimal XSecondMatrix, decimal YSecondMatrix)
         {
             
             (int XResultantMatrix, int YResultantMatrix) = ((int)XFirstMatrix, (int)YSecondMatrix);
 
+            System.Diagnostics.Debug.WriteLine($"{form.ClientSize.Width}");
+            int Width = form.ClientSize.Width - 2*FixedMarginX - 2*MatrixDistance;
+            int Height = form.ClientSize.Height - 2*FixedMarginY;
 
-            int Width = form.ClientSize.Width - 2*FixedMargin - 2*MatrixDistance;
-            int Height = form.ClientSize.Height - 2*FixedMargin;
+            //(int NumericUpDownsTotalWidth, int NumericUpDownsTotalHeight) =
+            //    (Width / (int)(XFirstMatrix + XSecondMatrix + XResultantMatrix), Height / (int)Math.Max(YFirstMatrix, YSecondMatrix));
 
-            (int NumericUpDownsTotalWidth, int NumericUpDownsTotalHeight) =
-                (Width / (int)(XFirstMatrix + XSecondMatrix + XResultantMatrix), Height / (int)Math.Max(YFirstMatrix, YSecondMatrix));
+            int NumericUpDownsTotalWidth = Width / (int)(XFirstMatrix + XSecondMatrix + XResultantMatrix);
 
-            
-            
-            if(FieldsPaddingX>NumericUpDownsTotalWidth | FieldsPaddingY>NumericUpDownsTotalHeight)
+
+            if (FieldsPaddingX>NumericUpDownsTotalWidth)// | FieldsPaddingY>NumericUpDownsTotalHeight)
             {
                 throw new InvalidPaddingException();
             }
 
-            (int NumericUpDownsWidth, int NumericUpDownsHeight) =
-                (NumericUpDownsTotalWidth-FieldsPaddingX, NumericUpDownsTotalWidth - FieldsPaddingY);
+            //(int NumericUpDownsWidth, int NumericUpDownsHeight) =
+            //    (NumericUpDownsTotalWidth-FieldsPaddingX, NumericUpDownsTotalHeight - FieldsPaddingY);
 
-            (float PercentsForFirstMatrixHeight, float PercentsForSecondMatrixHeight, float PercentsForResultingMatrixHeight) = CalculateHeightPercentages((int)YFirstMatrix, (int)YSecondMatrix);
+            int NumericUpDownsWidth = NumericUpDownsTotalWidth - FieldsPaddingX;
+            //(float PercentsForFirstMatrixHeight, float PercentsForSecondMatrixHeight, float PkercentsForResultingMatrixHeight) = CalculateHeightPercentages((int)YFirstMatrix, (int)YSecondMatrix);
 
 
-            int MarginXForFirstMatrix = FixedMargin;
-            int MarginYForFirstMatrix = (int)(Height - (int)(PercentsForFirstMatrixHeight * Height)) / 2 + FixedMargin;
+            int MarginXForFirstMatrix = FixedMarginX;
+            int MarginYForFirstMatrix = FixedMarginY;
+            //(Height - (int)(PercentsForFirstMatrixHeight * Height)) / 2 + FixedMarginY;
 
 
             NumericUpDown[,] FirstMatrix = GenerateMatrix(form, (int)XFirstMatrix, (int)YFirstMatrix, MarginXForFirstMatrix,
-                MarginYForFirstMatrix, NumericUpDownsHeight, NumericUpDownsWidth);
+                MarginYForFirstMatrix, NumericUpDownsWidth);//NumericUpDownsHeight, NumericUpDownsWidth);
 
-            int MarginXForSecondMatrix = FixedMargin + (int)XFirstMatrix*NumericUpDownsTotalWidth + MatrixDistance*2;
-            int MarginYForSecondMatrix = (int)(Height - (int)(PercentsForSecondMatrixHeight * Height)) / 2 + FixedMargin;
+            int MarginXForSecondMatrix = MarginXForFirstMatrix + MatrixDistance + (int)XFirstMatrix*NumericUpDownsTotalWidth;
+            int MarginYForSecondMatrix = FixedMarginY;
+            //(Height - (int)(PercentsForSecondMatrixHeight * Height)) / 2 + FixedMarginY;
 
 
             NumericUpDown[,] SecondMatrix = GenerateMatrix(form, (int)XSecondMatrix, (int)YSecondMatrix, MarginXForSecondMatrix,
-                MarginYForSecondMatrix, NumericUpDownsHeight, NumericUpDownsWidth);
+                MarginYForSecondMatrix, NumericUpDownsWidth); //NumericUpDownsHeight, NumericUpDownsWidth);
+
+            int MarginXForResultMatrix = MarginXForSecondMatrix + MatrixDistance  + (int)XSecondMatrix * NumericUpDownsTotalWidth;
+            int MarginYForResultMatrix = FixedMarginY;
+            //(Height - (int)(PercentsForResultingMatrixHeight * Height)) / 2 + FixedMarginY;
+
+
+            NumericUpDown[,] ResultMatrix = GenerateMatrix(form, (int)XResultantMatrix, (int)YResultantMatrix, MarginXForResultMatrix,
+                MarginYForResultMatrix, NumericUpDownsWidth); // NumericUpDownsHeight, NumericUpDownsWidth);
+
+
+            //form.Width = MarginXForResultMatrix + XResultantMatrix*NumericUpDownsTotalWidth + YResultantMatrix*NumericUpDownsTotalWidth;
+            //form.Height = Math.Max((int)(YFirstMatrix*NumericUpDownsTotalHeight), (int)(YSecondMatrix *NumericUpDownsTotalHeight));
 
             //NumericUpDown numericUpDown = new NumericUpDown();
 

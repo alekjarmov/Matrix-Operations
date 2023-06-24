@@ -34,7 +34,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(884, 561);
+            ClientSize = new Size(984, 361);
             Name = "MatrixMultiplicationInput";
             Text = "MatrixMultiplicationInput";
             ResumeLayout(false);

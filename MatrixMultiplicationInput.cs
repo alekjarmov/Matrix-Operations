@@ -15,13 +15,19 @@ namespace MatrixOperations
         //decimal YFirstMatrix;
         //decimal XSecondMatrix;  
         //decimal YSecondMatrix;
+        private void SetWidthAndHeight(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix)
+        {
+            Width = (XFirstMatrix + XSecondMatrix) * (100 + GeneratorMethods.FieldsPaddingX) + GeneratorMethods.MatrixDistance*2 + 100;
+            Height = Math.Max(YFirstMatrix,YSecondMatrix) * (40 + GeneratorMethods.FieldsPaddingY) + 100;
+
+        }
         public MatrixMultiplicationInput(decimal XFirstMatrix, decimal YFirstMatrix, decimal XSecondMatrix, decimal YSecondMatrix)
         {
             InitializeComponent();
-            //Width = (int)(2*XFirstMatrix + XSecondMatrix) * 50;
-            //Height = (int)Math.Max(YFirstMatrix,YSecondMatrix) * 50;
-            
-            this.GenerateTwoMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix);
+            SetWidthAndHeight((int)XFirstMatrix, (int)YFirstMatrix, (int)XSecondMatrix, (int)YSecondMatrix);
+
+            this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix);
+
         }
     }
 }
