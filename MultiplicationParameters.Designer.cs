@@ -48,9 +48,11 @@
             // 
             XFirstMatrix.Location = new Point(15, 58);
             XFirstMatrix.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            XFirstMatrix.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             XFirstMatrix.Name = "XFirstMatrix";
             XFirstMatrix.Size = new Size(85, 23);
             XFirstMatrix.TabIndex = 0;
+            XFirstMatrix.Value = new decimal(new int[] { 1, 0, 0, 0 });
             XFirstMatrix.ValueChanged += XFirstMatrix_ValueChanged;
             // 
             // YFirstMatrix
@@ -78,9 +80,12 @@
             // YSecondMatrix
             // 
             YSecondMatrix.Location = new Point(125, 106);
+            YSecondMatrix.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            YSecondMatrix.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             YSecondMatrix.Name = "YSecondMatrix";
             YSecondMatrix.Size = new Size(85, 23);
             YSecondMatrix.TabIndex = 3;
+            YSecondMatrix.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // x
             // 
@@ -156,7 +161,7 @@
             Controls.Add(YFirstMatrix);
             Controls.Add(XFirstMatrix);
             Name = "MultiplicationParameters";
-            Text = "MultiplicationParameters";
+            Text = "Dimensions";
             ((System.ComponentModel.ISupportInitialize)XFirstMatrix).EndInit();
             ((System.ComponentModel.ISupportInitialize)YFirstMatrix).EndInit();
             ((System.ComponentModel.ISupportInitialize)XSecondMatrix).EndInit();

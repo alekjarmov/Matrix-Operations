@@ -16,3 +16,4 @@ C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOpera
 C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.genruntimeconfig.cache
 C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\ref\MatrixOperations.dll
 C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.MultiplicationParameters.resources
+C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.AdditionParameters.resources

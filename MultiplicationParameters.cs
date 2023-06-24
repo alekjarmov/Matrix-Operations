@@ -20,6 +20,7 @@ namespace MatrixOperations
             foreach (var input in inputs)
             {
                 input.Minimum = 1;
+                input.Maximum = 10;
                 input.Value = 1;
             }
 

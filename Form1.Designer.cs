@@ -50,7 +50,7 @@
             listBoxOptions.BackColor = SystemColors.ControlLight;
             listBoxOptions.FormattingEnabled = true;
             listBoxOptions.ItemHeight = 15;
-            listBoxOptions.Items.AddRange(new object[] { "Addition", "Multiplication" });
+            listBoxOptions.Items.AddRange(new object[] { "Addition", "Subtraction", "Multiplication" });
             listBoxOptions.Location = new Point(14, 49);
             listBoxOptions.Name = "listBoxOptions";
             listBoxOptions.Size = new Size(154, 94);
