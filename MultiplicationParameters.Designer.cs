@@ -35,6 +35,7 @@
             x = new Label();
             label1 = new Label();
             MatrixInput = new Button();
+            labelMultiplictationDimensions = new Label();
             ((System.ComponentModel.ISupportInitialize)XFirstMatrix).BeginInit();
             ((System.ComponentModel.ISupportInitialize)YFirstMatrix).BeginInit();
             ((System.ComponentModel.ISupportInitialize)XSecondMatrix).BeginInit();
@@ -43,21 +44,21 @@
             // 
             // XFirstMatrix
             // 
-            XFirstMatrix.Location = new Point(51, 69);
+            XFirstMatrix.Location = new Point(51, 51);
             XFirstMatrix.Name = "XFirstMatrix";
             XFirstMatrix.Size = new Size(85, 23);
             XFirstMatrix.TabIndex = 0;
             // 
             // YFirstMatrix
             // 
-            YFirstMatrix.Location = new Point(161, 69);
+            YFirstMatrix.Location = new Point(161, 51);
             YFirstMatrix.Name = "YFirstMatrix";
             YFirstMatrix.Size = new Size(85, 23);
             YFirstMatrix.TabIndex = 1;
             // 
             // XSecondMatrix
             // 
-            XSecondMatrix.Location = new Point(51, 122);
+            XSecondMatrix.Location = new Point(51, 94);
             XSecondMatrix.Name = "XSecondMatrix";
             XSecondMatrix.Size = new Size(85, 23);
             XSecondMatrix.TabIndex = 2;
@@ -72,7 +73,7 @@
             // x
             // 
             x.AutoSize = true;
-            x.Location = new Point(142, 71);
+            x.Location = new Point(142, 53);
             x.Name = "x";
             x.Size = new Size(13, 15);
             x.TabIndex = 4;
@@ -97,11 +98,21 @@
             MatrixInput.Text = "To matrix input";
             MatrixInput.UseVisualStyleBackColor = true;
             // 
+            // labelMultiplictationDimensions
+            // 
+            labelMultiplictationDimensions.AutoSize = true;
+            labelMultiplictationDimensions.Location = new Point(65, 25);
+            labelMultiplictationDimensions.Name = "labelMultiplictationDimensions";
+            labelMultiplictationDimensions.Size = new Size(38, 15);
+            labelMultiplictationDimensions.TabIndex = 7;
+            labelMultiplictationDimensions.Text = "label2";
+            // 
             // MultiplicationParameters
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(547, 232);
+            Controls.Add(labelMultiplictationDimensions);
             Controls.Add(MatrixInput);
             Controls.Add(label1);
             Controls.Add(x);
@@ -128,5 +139,6 @@
         private Label x;
         private Label label1;
         private Button MatrixInput;
+        private Label labelMultiplictationDimensions;
     }
 }

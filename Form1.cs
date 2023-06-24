@@ -2,6 +2,7 @@ namespace MatrixOperations
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -9,6 +10,33 @@ namespace MatrixOperations
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void listBoxOptions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonShowOperation_Click(object sender, EventArgs e)
+        {
+            if (listBoxOptions.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select an option");
+                return;
+            }
+
+            string selectedOption = listBoxOptions.SelectedItem.ToString();
+            switch (selectedOption)
+            {
+                case "Addition":
+                    label1.Text = "Addition";
+                    break;
+                case "Multiplication":
+                    MultiplicationParameters multiplicationParameters = new MultiplicationParameters();
+                    multiplicationParameters.Show();
+                    break;
+            }
 
         }
     }
