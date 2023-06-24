@@ -16,3 +16,22 @@ C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOpera
 C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.genruntimeconfig.cache
 C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\ref\MatrixOperations.dll
 C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.MultiplicationParameters.resources
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\bin\Debug\net7.0-windows\MatrixOperations.exe
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\bin\Debug\net7.0-windows\MatrixOperations.deps.json
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\bin\Debug\net7.0-windows\MatrixOperations.runtimeconfig.json
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\bin\Debug\net7.0-windows\MatrixOperations.dll
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\bin\Debug\net7.0-windows\MatrixOperations.pdb
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.csproj.AssemblyReference.cache
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.Form1.resources
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.MatrixMultiplicationInput.resources
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.MultiplicationParameters.resources
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.csproj.GenerateResource.cache
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.AssemblyInfoInputs.cache
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.AssemblyInfo.cs
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.csproj.CoreCompileInputs.cache
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.dll
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\refint\MatrixOperations.dll
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.pdb
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.genruntimeconfig.cache
+C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\ref\MatrixOperations.dll
