@@ -28,31 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            label1 = new Label();
+            listBox1 = new ListBox();
             SuspendLayout();
             // 
-            // button1
+            // label1
             // 
-            button1.Location = new Point(119, 92);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            label1.AutoSize = true;
+            label1.Location = new Point(41, 76);
+            label1.Name = "label1";
+            label1.Size = new Size(132, 15);
+            label1.TabIndex = 1;
+            label1.Text = "Select matrix operation:";
+            label1.Click += label1_Click;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Items.AddRange(new object[] { "Addition", "Multiplication" });
+            listBox1.Location = new Point(262, 61);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(120, 94);
+            listBox1.TabIndex = 2;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            ClientSize = new Size(529, 207);
+            Controls.Add(listBox1);
+            Controls.Add(label1);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
-        private Button button1;
+        private Label label1;
+        private ListBox listBox1;
     }
 }
