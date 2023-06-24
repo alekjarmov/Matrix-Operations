@@ -97,6 +97,7 @@
             MatrixInput.TabIndex = 6;
             MatrixInput.Text = "To matrix input";
             MatrixInput.UseVisualStyleBackColor = true;
+            MatrixInput.Click += MatrixInput_Click;
             // 
             // labelMultiplictationDimensions
             // 

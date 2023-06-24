@@ -21,5 +21,15 @@ namespace MatrixOperations
         {
 
         }
+
+        private void MatrixInput_Click(object sender, EventArgs e)
+        {
+            (decimal FirstMatrixX, decimal FirstMatrixY, decimal SecondMatrixX, decimal SecondMatrixY) =
+                (XFirstMatrix.Value, YFirstMatrix.Value, XSecondMatrix.Value, YSecondMatrix.Value);
+
+            MatrixMultiplicationInput form = new MatrixMultiplicationInput(FirstMatrixX,FirstMatrixY, SecondMatrixX, SecondMatrixY);
+            form.ShowDialog();
+
+        }
     }
 }
