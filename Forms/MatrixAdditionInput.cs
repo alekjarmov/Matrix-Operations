@@ -16,11 +16,14 @@ namespace MatrixOperations.Forms
         public MatrixAdditionInput(decimal X, decimal Y) : base()
         {
             InitializeComponent();
-            (NumericUpDown[,] FirstMatrix, NumericUpDown[,] SecondMatrix, TextBox[,] ResultantMatrix) =
-                InitializeInputEnvironment((int)X,(int)Y, (int)X, (int)Y, "+");
-
+            InitializeInputEnvironment((int)X, (int)Y, (int)X, (int)Y, "+");
 
 
         }
+        public override void StartAnimation(object? sender, EventArgs e)
+        {
+            
+        }
+
     }
 }

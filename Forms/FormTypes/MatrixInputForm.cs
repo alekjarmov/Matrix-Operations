@@ -11,18 +11,45 @@ using System.Windows.Forms;
 
 namespace MatrixOperations.Forms.FormTypes
 {
-    public partial class MatrixInputForm : Form
+    public abstract partial class MatrixInputForm : Form
     {
+        protected NumericUpDown[,] FirstMatrix;
+        protected NumericUpDown[,] SecondMatrix;
+        protected TextBox[,] ResultantMatrix;
+        protected Button CalculateButton;
+
+        protected int[,] FirstMatrixValues;
+        protected int[,] SecondMatrixValues;
         public MatrixInputForm()
         {
 
         }
 
-        public (NumericUpDown[,], NumericUpDown[,], TextBox[,]) InitializeInputEnvironment(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
+        public void InitializeInputEnvironment(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
         {
             this.SetWidthAndHeight(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix);
-            this.GenerateAnimationButton(XFirstMatrix, XSecondMatrix);
-            return this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
+            CalculateButton = this.GenerateAnimationButton(XFirstMatrix, XSecondMatrix);
+            (FirstMatrix, SecondMatrix, ResultantMatrix) = this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
+
+            FirstMatrixValues = TransformNumericalUpDownToIntegerMatrix(FirstMatrix);
+            SecondMatrixValues = TransformNumericalUpDownToIntegerMatrix(SecondMatrix);
+
+
         }
+
+        private int[,] TransformNumericalUpDownToIntegerMatrix(NumericUpDown[,] Matrix)
+        {
+            int[,] Values = new int[Matrix.GetLength(0), Matrix.GetLength(1)];
+            for (int i = 0; i < Matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < Matrix.GetLength(1); j++)
+                {
+                    Values[i, j] = (int)Matrix[i, j].Value;
+                }
+            }
+            return Values;
+        }
+
+        public abstract void StartAnimation(object? sender, EventArgs e);
     }
 }
