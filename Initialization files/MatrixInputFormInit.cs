@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace MatrixOperations
 {
-    public static class OperationFormInit 
+    public static class MatrixInputFormInit 
     {
         
 

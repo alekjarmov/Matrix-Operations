@@ -13,7 +13,7 @@ namespace MatrixOperations.Forms
 {
     public partial class MatrixAdditionInput : MatrixInputForm
     {
-        public MatrixAdditionInput(decimal X, decimal Y)
+        public MatrixAdditionInput(decimal X, decimal Y) : base()
         {
             InitializeComponent();
             (NumericUpDown[,] FirstMatrix, NumericUpDown[,] SecondMatrix, TextBox[,] ResultantMatrix) =
