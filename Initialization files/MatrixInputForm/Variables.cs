@@ -42,5 +42,9 @@ namespace MatrixOperations.Initialization_files
         public static readonly int ButtonWidth = 70;
         public static readonly int ButtonHeight = 20;
         //------------------------------
+
+        // Labels offset
+        public static readonly int DistanceFromMatrixes = 30;
+        //------------------------------
     }
 }

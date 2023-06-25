@@ -29,7 +29,7 @@ namespace MatrixOperations.Forms.FormTypes
             this.SetWidthAndHeight(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix);
             CalculateButton = this.GenerateAnimationButton(XFirstMatrix, XSecondMatrix);
             (FirstMatrix, SecondMatrix, ResultantMatrix) = this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
-
+            this.GenerateLabels(YFirstMatrix,YSecondMatrix);
 
 
         }
