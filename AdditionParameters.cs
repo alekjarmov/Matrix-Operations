@@ -31,7 +31,7 @@ namespace MatrixOperations
 
         private void MatrixInput_Click(object sender, EventArgs e)
         {
-            MatrixAdditionInput form = new MatrixAdditionInput(XFirstMatrix.Value, YFirstMatrix.Value);
+            MatrixAdditionInput form = new MatrixAdditionInput(XFirstMatrix.Value, YFirstMatrix.Value, Mode);
             this.Close();
             form.ShowDialog();
         }
