@@ -1,4 +1,5 @@
 ﻿using MatrixOperations.Exceptions;
+using MatrixOperations.Forms.FormTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace MatrixOperations
 {
-    public static class OperationFormInit
+    public static class OperationFormInit 
     {
         
 
@@ -30,7 +31,7 @@ namespace MatrixOperations
         public static readonly int LeftOffset = 50;
         public static readonly int RightOffset = 200;
         
-        public static NumericUpDown[,] GenerateMatrix(Form form, int X, int Y, 
+        public static NumericUpDown[,] GenerateMatrix(MatrixInputForm form, int X, int Y, 
                                     int MarginX,int MarginY)
         {
             NumericUpDown[,] numericUpDowns = new NumericUpDown[X, Y];
@@ -49,7 +50,7 @@ namespace MatrixOperations
 
             return numericUpDowns;
         }
-        public static TextBox[,] GenerateDisabledTextBoxMatrix(Form form, int X, int Y,
+        public static TextBox[,] GenerateDisabledTextBoxMatrix(MatrixInputForm form, int X, int Y,
                                     int MarginX, int MarginY)
         {
 
@@ -91,7 +92,7 @@ namespace MatrixOperations
         }
 
        
-        private static NumericUpDown[,] GenerateFirstMatrix(this Form form, int XFirstMatrix, int YFirstMatrix, int CenterMarginYFirstMatrix)
+        private static NumericUpDown[,] GenerateFirstMatrix(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int CenterMarginYFirstMatrix)
         {
             // <summary>
             // Generates the first matrix
@@ -106,7 +107,7 @@ namespace MatrixOperations
 
         }
 
-        private static NumericUpDown[,] GenerateSecondMatrix(this Form form, int XSecondMatrix, int YSecondMatrix, int YFirstMatrix, int CenterMarginYSecondMatrix)
+        private static NumericUpDown[,] GenerateSecondMatrix(this MatrixInputForm form, int XSecondMatrix, int YSecondMatrix, int YFirstMatrix, int CenterMarginYSecondMatrix)
         {
             // <summary>
             // Generates the second matrix 
@@ -120,7 +121,7 @@ namespace MatrixOperations
 
         }
 
-        private static TextBox[,] GenerateResultingMatrix(this Form form, int XResultantMatrix, int YResultantMatrix, int YFirstMatrix, int YSecondMatrix, int CenterMarginYResultMatrix)
+        private static TextBox[,] GenerateResultingMatrix(this MatrixInputForm form, int XResultantMatrix, int YResultantMatrix, int YFirstMatrix, int YSecondMatrix, int CenterMarginYResultMatrix)
                                                         
         {
             //<summary>
@@ -133,7 +134,7 @@ namespace MatrixOperations
            return GenerateDisabledTextBoxMatrix(form,XResultantMatrix, YResultantMatrix, MarginXForResultMatrix,
                 MarginYForResultMatrix);
         }
-        public static (NumericUpDown[,], NumericUpDown[,], TextBox[,]) GenerateMatrices(this Form form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
+        public static (NumericUpDown[,], NumericUpDown[,], TextBox[,]) GenerateMatrices(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
         {
             //<summary>
             // Generate the first operand matrix, the second operand matrix and the result matrix.
@@ -195,7 +196,7 @@ namespace MatrixOperations
 
         
 
-        public static void SetWidthAndHeight(this Form form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix)
+        public static void SetWidthAndHeight(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix)
         {
             (int XResultantMatrix, int YResultantMatrix) = (XFirstMatrix, YSecondMatrix);
             form.Width = (XFirstMatrix + XSecondMatrix + XResultantMatrix) * FieldsTotalWidth + MatrixDistance * 2 + LeftOffset + RightOffset;

@@ -1,3 +1,5 @@
+using MatrixOperations.Forms;
+
 namespace MatrixOperations
 {
     public partial class Form1 : Form
@@ -30,7 +32,8 @@ namespace MatrixOperations
             switch (selectedOption)
             {
                 case "Addition":
-                    label1.Text = "Addition";
+                    AdditionParameters additionParameters = new AdditionParameters();
+                    additionParameters.Show();
                     break;
                 case "Multiplication":
                     MultiplicationParameters multiplicationParameters = new MultiplicationParameters();
