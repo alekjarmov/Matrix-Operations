@@ -4,9 +4,6 @@
     <Compile Update="AdditionParameters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\AdditionParameters.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

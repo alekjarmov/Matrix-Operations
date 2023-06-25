@@ -24,18 +24,22 @@ namespace MatrixOperations
         {
             if (listBoxOptions.SelectedIndex == -1)
             {
-                MessageBox.Show("Please select an option");
+                var mbox = MessageBox.Show("Please select an operation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            string selectedOption = listBoxOptions.SelectedItem.ToString();
+            string selectedOption = listBoxOptions.SelectedItem.ToString().ToLower();
             switch (selectedOption)
             {
-                case "Addition":
-                    AdditionParameters additionParameters = new AdditionParameters();
+                case "addition":
+                    AdditionParameters additionParameters = new AdditionParameters(selectedOption);
                     additionParameters.Show();
                     break;
-                case "Multiplication":
+                case "subtraction":
+                    AdditionParameters subtractionParameters = new AdditionParameters(selectedOption);
+                    subtractionParameters.Show();
+                    break;
+                case "multiplication":
                     MultiplicationParameters multiplicationParameters = new MultiplicationParameters();
                     multiplicationParameters.Show();
                     break;

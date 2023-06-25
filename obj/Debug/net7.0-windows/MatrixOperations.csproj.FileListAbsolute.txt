@@ -39,3 +39,8 @@ C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\pro
 C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.Forms.FormTypes.ParameterForm.resources
 C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.Forms.MatrixAdditionInput.resources
 C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\obj\Debug\net7.0-windows\MatrixOperations.MultiplicationAnimation.resources
+C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.AdditionParameters.resources
+C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.Forms.FormTypes.MatrixInputForm.resources
+C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.Forms.FormTypes.ParameterForm.resources
+C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.Forms.MatrixAdditionInput.resources
+C:\Users\Alek\source\repos\MatrixOperations\obj\Debug\net7.0-windows\MatrixOperations.MultiplicationAnimation.resources
