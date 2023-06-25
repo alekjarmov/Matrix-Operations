@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace MatrixOperations
 {
-    public partial class MultiplicationAnimation : MatrixInputForm
+    public partial class MatrixMultiplicationInput : MatrixInputForm
     {
         
-        public MultiplicationAnimation(decimal XFirstMatrix, decimal YFirstMatrix, decimal XSecondMatrix, decimal YSecondMatrix)
+        public MatrixMultiplicationInput(decimal XFirstMatrix, decimal YFirstMatrix, decimal XSecondMatrix, decimal YSecondMatrix)
             : base()
         {
             InitializeComponent();

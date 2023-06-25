@@ -1,6 +1,6 @@
 ﻿namespace MatrixOperations
 {
-    partial class MultiplicationAnimation
+    partial class MatrixMultiplicationInput
     {
         /// <summary>
         /// Required designer variable.
