@@ -17,8 +17,8 @@ namespace MatrixOperations
         //decimal YSecondMatrix;
         private void SetWidthAndHeight(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix)
         {
-            Width = (XFirstMatrix + XSecondMatrix) * (100 + GeneratorMethods.FieldsPaddingX) + GeneratorMethods.MatrixDistance*2 + 100;
-            Height = Math.Max(YFirstMatrix,YSecondMatrix) * (40 + GeneratorMethods.FieldsPaddingY) + 100;
+            Width = (XFirstMatrix + XSecondMatrix) * (100 + GeneratorMethods.FieldsPaddingX) + GeneratorMethods.MatrixDistance*2 + 150;
+            Height = Math.Max(YFirstMatrix,YSecondMatrix) * (23 + GeneratorMethods.FieldsPaddingY) + 250;
 
         }
         public MatrixMultiplicationInput(decimal XFirstMatrix, decimal YFirstMatrix, decimal XSecondMatrix, decimal YSecondMatrix)
