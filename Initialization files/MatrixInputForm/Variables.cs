@@ -11,22 +11,22 @@ namespace MatrixOperations.Initialization_files
         // Properites per field
         public static readonly int FieldsWidth = 50;
         public static readonly int FieldsHeight = 23; //Default height per textBox and numericalUpDown
-        public static readonly int FieldsPaddingLeft = 20;
-        public static readonly int FieldsPaddingTop = 20;
+        public static readonly int FieldsPaddingLeft = 10;
+        public static readonly int FieldsPaddingTop = 10;
         public static readonly int FieldsTotalHeight = FieldsHeight + FieldsPaddingTop;
         public static readonly int FieldsTotalWidth = FieldsWidth + FieldsPaddingLeft;
         //------------------------------
 
 
         // Distance between matrices
-        public static readonly int MatrixDistance = 50;
+        public static readonly int MatrixDistance = 30;
         //------------------------------
 
 
         // Offset from the matrices block
         public static readonly int TopOffset = 50;
-        public static readonly int BottomOffset = 80;
-        public static readonly int LeftOffset = 50;
+        public static readonly int BottomOffset = 120;
+        public static readonly int LeftOffset = 30;
         public static readonly int RightOffset = 0;
         //------------------------------
 
@@ -45,6 +45,7 @@ namespace MatrixOperations.Initialization_files
 
         // Buttons options
         public static readonly int ButtonsMarginLeft = 20;
+        public static readonly int ButtonsMarginBottom = 20;
         //------------------------------
 
         // Labels offset
@@ -52,7 +53,7 @@ namespace MatrixOperations.Initialization_files
         //------------------------------
 
         // Time between iterations in ms
-        public static readonly int IterationTime = 500;
+        public static int IterationTime = 500;
         //------------------------------
         
     }

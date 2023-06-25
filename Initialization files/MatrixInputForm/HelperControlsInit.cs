@@ -82,6 +82,26 @@ namespace MatrixOperations.Initialization_files
         }
         //---------------------------------------------------
 
+        // Generate NumericalUpDown for Speed
+        public static NumericUpDown GenerateNumericUpDownAndLabel(this MatrixInputForm form, int Top, int Left, int StartingValue, EventHandler OnChange, string LabelText)
+        {
+            Label label = new Label();
+            label.Top = Top;
+            label.Left = Left;
+            label.Text = LabelText; 
+            form.Controls.Add(label);
+
+            NumericUpDown NumericUpDown = new NumericUpDown();
+            NumericUpDown.Top = Top;
+            NumericUpDown.Maximum = 100000;
+            NumericUpDown.Left = Left + label.Width;  
+            NumericUpDown.Value = StartingValue;
+            NumericUpDown.ValueChanged += OnChange;
+            form.Controls.Add(NumericUpDown);
+
+            return NumericUpDown;
+        }
+
 
 
     }

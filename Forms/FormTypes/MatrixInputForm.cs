@@ -22,6 +22,7 @@ namespace MatrixOperations.Forms.FormTypes
         protected int XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix;
         protected string Sign;
         protected CancellationTokenSource IterationToken;
+        protected NumericUpDown IterationSpeed;
         public MatrixInputForm()
         {
 
@@ -79,7 +80,7 @@ namespace MatrixOperations.Forms.FormTypes
             this.Sign = Sign;
             Text = "Calculation Visualization";
             this.SetWidthAndHeight(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix);
-            
+
             (FirstMatrix, SecondMatrix, ResultantMatrix) = this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
             ResetColorNumericUpDowns();
             ResetResultantMatrix();
@@ -89,7 +90,18 @@ namespace MatrixOperations.Forms.FormTypes
             ClearButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Clear", GenerateAllInputs,
                 Variables.LeftOffset + 2*Variables.ButtonsMarginLeft + 2*CalculateButton.Width);
 
+            IterationSpeed = this.GenerateNumericUpDownAndLabel(
+                Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset + CalculateButton.Height + Variables.ButtonsMarginBottom,
+                Variables.LeftOffset,
+                Variables.IterationTime,
+                UpdateIterationSpeed,
+                "Speed: ");
+
             this.GenerateLabels(YFirstMatrix,YSecondMatrix);
+        }
+        public void UpdateIterationSpeed(object? sender, EventArgs e)
+        {
+            Variables.IterationTime = (int)IterationSpeed.Value;
         }
         public void RandomizeInputs(object? sender, EventArgs e)
         {
@@ -115,7 +127,12 @@ namespace MatrixOperations.Forms.FormTypes
                 Variables.LeftOffset + Variables.ButtonsMarginLeft + CalculateButton.Width);
             ClearButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Clear", GenerateAllInputs,
                 Variables.LeftOffset + 2 * Variables.ButtonsMarginLeft + 2 * CalculateButton.Width);
-
+            IterationSpeed = this.GenerateNumericUpDownAndLabel(
+                Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset + CalculateButton.Height + Variables.ButtonsMarginBottom,
+                Variables.LeftOffset,
+                Variables.IterationTime,
+                UpdateIterationSpeed,
+                "Speed: ");
             ResetColorNumericUpDowns();
             ResetResultantMatrix();
             this.GenerateLabels(YFirstMatrix, YSecondMatrix);
@@ -125,6 +142,8 @@ namespace MatrixOperations.Forms.FormTypes
         {
             CalculateButton.Enabled = false;
             RandomizeButton.Enabled = false;
+            IterationSpeed.Enabled = false;
+
             EnableAllNumericUpDowns(false);
             IterationToken = new CancellationTokenSource();
             
@@ -139,6 +158,8 @@ namespace MatrixOperations.Forms.FormTypes
         {
             CalculateButton.Enabled = true;
             RandomizeButton.Enabled = true;
+            IterationSpeed.Enabled = true;
+
             EnableAllNumericUpDowns();
             
 
