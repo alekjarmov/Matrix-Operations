@@ -9,7 +9,7 @@ namespace MatrixOperations.Initialization_files
     public class Variables
     {
         // Properites per field
-        public static readonly int FieldsWidth = 30;
+        public static readonly int FieldsWidth = 50;
         public static readonly int FieldsHeight = 23; //Default height per textBox and numericalUpDown
         public static readonly int FieldsPaddingLeft = 20;
         public static readonly int FieldsPaddingTop = 20;

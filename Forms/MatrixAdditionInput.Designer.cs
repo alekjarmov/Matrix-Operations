@@ -1,6 +1,8 @@
-﻿namespace MatrixOperations.Forms
+﻿using MatrixOperations.Forms.FormTypes;
+
+namespace MatrixOperations.Forms
 {
-    partial class MatrixAdditionInput
+    partial class MatrixAdditionInput : MatrixInputForm
     {
         /// <summary>
         /// Required designer variable.

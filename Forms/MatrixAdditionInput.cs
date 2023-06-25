@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MatrixOperations.Forms
 {
-    public partial class MatrixAdditionInput : MatrixInputForm
+    public partial class MatrixAdditionInput
     {
         public MatrixAdditionInput(decimal X, decimal Y) : base()
         {
