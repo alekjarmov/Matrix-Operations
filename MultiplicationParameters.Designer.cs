@@ -46,6 +46,7 @@
             // 
             // XFirstMatrix
             // 
+            XFirstMatrix.BackColor = SystemColors.Window;
             XFirstMatrix.Location = new Point(15, 58);
             XFirstMatrix.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             XFirstMatrix.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -115,6 +116,7 @@
             MatrixInput.TabIndex = 6;
             MatrixInput.Text = "Go to AxB calculator";
             MatrixInput.UseVisualStyleBackColor = true;
+            MatrixInput.Click += MatrixInput_Click;
             // 
             // labelMultiplictationDimensions
             // 
