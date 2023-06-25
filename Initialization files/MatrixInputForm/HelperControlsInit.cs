@@ -29,7 +29,7 @@ namespace MatrixOperations.Initialization_files
             AnimateButton.Text = "Calculate";
             AnimateButton.Width = Variables.ButtonWidth;
             AnimateButton.Height = Variables.ButtonHeight;
-
+            AnimateButton.Click += form.StartAnimation;
             form.Controls.Add(AnimateButton);
 
             return AnimateButton;
