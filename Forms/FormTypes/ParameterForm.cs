@@ -8,8 +8,9 @@ namespace MatrixOperations.Forms.FormTypes
 {
     public partial class ParameterForm : Form
     {
-        public ParameterForm() {
-            
+        public ParameterForm()
+        {
+
         }
     }
 }

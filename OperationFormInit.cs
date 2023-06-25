@@ -23,14 +23,21 @@ namespace MatrixOperations
         public static readonly int FieldsTotalWidth = FieldsWidth + FieldsPaddingLeft;
 
         // Distance between matrices
-        public static readonly int MatrixDistance = 20;
+        public static readonly int MatrixDistance = 50;
 
         // Offset from the matrices block
         public static readonly int TopOffset = 50;
         public static readonly int BottomOffset = 250;
         public static readonly int LeftOffset = 50;
         public static readonly int RightOffset = 200;
-        
+
+
+        //Operators Text Size
+        public static readonly int FontEqualsHeight = 11;
+        public static readonly int FontEqualsWidth = 8;
+        public static readonly int FontOperationHeight = 8;
+        public static readonly int FontOperationWidth = 8;
+
         public static NumericUpDown[,] GenerateMatrix(MatrixInputForm form, int X, int Y, 
                                     int MarginX,int MarginY)
         {
@@ -78,7 +85,7 @@ namespace MatrixOperations
             if (XFirstMatrix > XSecondMatrix)
             {
                 MarginFirstMatrix = 0;
-                MarginSecondMatrix = ((XFirstMatrix-XSecondMatrix) * FieldsTotalHeight) /2;
+                MarginSecondMatrix = ((XFirstMatrix - XSecondMatrix) * FieldsTotalHeight) /2;
 
             }
             else
@@ -112,7 +119,7 @@ namespace MatrixOperations
             // <summary>
             // Generates the second matrix 
             //</summary>
-            int MarginXForSecondMatrix = LeftOffset + MatrixDistance + YFirstMatrix * FieldsTotalWidth;
+            int MarginXForSecondMatrix = LeftOffset + MatrixDistance + YFirstMatrix * FieldsTotalWidth - FieldsPaddingLeft;
             int MarginYForSecondMatrix = TopOffset + CenterMarginYSecondMatrix;
 
 
@@ -127,7 +134,7 @@ namespace MatrixOperations
             //<summary>
             // Generates the resulting matrix
             //</summary>
-            int MarginXForResultMatrix = LeftOffset + 2*MatrixDistance + YFirstMatrix * FieldsTotalWidth + YSecondMatrix* FieldsTotalWidth;
+            int MarginXForResultMatrix = LeftOffset + 2*MatrixDistance + YFirstMatrix * FieldsTotalWidth  + YSecondMatrix* FieldsTotalWidth - 2*FieldsPaddingLeft;
             int MarginYForResultMatrix = TopOffset + CenterMarginYResultMatrix;
 
 
@@ -159,16 +166,20 @@ namespace MatrixOperations
             return (FirstMatrix, SecondMatrix, ResultMatrix);
 
         }
-        private static int GenerateSignsY(int XFirstMatrix, int XSecondMatrix)
+        private static int GenerateOperationSignY(int XFirstMatrix, int XSecondMatrix)
         {
-            return TopOffset + (XFirstMatrix > XSecondMatrix ? (XFirstMatrix * FieldsTotalHeight - FieldsPaddingTop) : (XSecondMatrix * FieldsTotalHeight - FieldsPaddingTop)) / 2;
+            return TopOffset + (XFirstMatrix > XSecondMatrix ? (XFirstMatrix * FieldsTotalHeight - FieldsPaddingTop) : (XSecondMatrix * FieldsTotalHeight - FieldsPaddingTop)) / 2 - FontOperationHeight;
+        }
+        private static int GenerateEqualsSignY(int XFirstMatrix, int XSecondMatrix)
+        {
+            return TopOffset + (XFirstMatrix > XSecondMatrix ? (XFirstMatrix * FieldsTotalHeight - FieldsPaddingTop) : (XSecondMatrix * FieldsTotalHeight - FieldsPaddingTop)) / 2 - FontEqualsHeight;
         }
         private static int GenerateOperationSignX(int YFirstMatrix)
         {
-            return LeftOffset+ YFirstMatrix * FieldsTotalWidth - FieldsPaddingLeft + MatrixDistance/2;
+            return LeftOffset + YFirstMatrix * FieldsTotalWidth - FieldsPaddingLeft + MatrixDistance/2 - FontOperationWidth;
         }
         private static int GenerateEqualsSignX(int YFirstMatrix, int YSecondMatrix) {
-            return LeftOffset + (YFirstMatrix + YSecondMatrix) * FieldsTotalWidth + MatrixDistance/2;
+            return LeftOffset + (YFirstMatrix + YSecondMatrix) * FieldsTotalWidth - 2*FieldsPaddingLeft + MatrixDistance + MatrixDistance/2 - FontEqualsWidth;
         }
         private static Label GenerateLabel(int Top, int Left, Size size, string Text)
         {
@@ -182,13 +193,15 @@ namespace MatrixOperations
         }
         private static (Label,Label) GenerateSigns(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
         {
-            int SignsY = GenerateSignsY(XFirstMatrix,XSecondMatrix);
+            //int SignsY = GenerateSignsY(XFirstMatrix,XSecondMatrix);
+            int PositionOperationY= GenerateOperationSignY(XFirstMatrix, XSecondMatrix);
+            int PositionEqualsY = GenerateEqualsSignY(XFirstMatrix, XSecondMatrix);
             int PositionOperationX = GenerateOperationSignX(YFirstMatrix);
             int PositionEqualsX = GenerateEqualsSignX(YFirstMatrix,YSecondMatrix);
 
 
-            Label OperationLabel = GenerateLabel(SignsY, PositionOperationX, new Size(MatrixDistance, MatrixDistance), Sign);    
-            Label EqualsLabel = GenerateLabel(SignsY, PositionEqualsX, new Size(MatrixDistance, MatrixDistance), "="); ;
+            Label OperationLabel = GenerateLabel(PositionOperationY, PositionOperationX, new Size(FontOperationWidth, FontEqualsHeight), Sign);    
+            Label EqualsLabel = GenerateLabel(PositionEqualsY, PositionEqualsX, new Size(FontEqualsWidth, FontEqualsHeight), "="); ;
             
             return (OperationLabel,EqualsLabel);
 
