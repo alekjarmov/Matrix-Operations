@@ -1,47 +1,21 @@
 ﻿using MatrixOperations.Exceptions;
 using MatrixOperations.Forms.FormTypes;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MatrixOperations.Initialization_files;
 
 namespace MatrixOperations
 {
-    public static class MatrixInputFormInit 
+    public static class MatrixInit 
     {
         
 
-        // Properites per field
-        public static readonly int FieldsWidth = 30;
-        public static readonly int FieldsHeight = 23; //Default height per textBox and numericalUpDown
-        public static readonly int FieldsPaddingLeft = 20;
-        public static readonly int FieldsPaddingTop = 20;
-        public static readonly int FieldsTotalHeight = FieldsHeight + FieldsPaddingTop;
-        public static readonly int FieldsTotalWidth = FieldsWidth + FieldsPaddingLeft;
-        //------------------------------
         
-
-        // Distance between matrices
-        public static readonly int MatrixDistance = 50;
-        //------------------------------
-
-
-        // Offset from the matrices block
-        public static readonly int TopOffset = 50;
-        public static readonly int BottomOffset = 250;
-        public static readonly int LeftOffset = 50;
-        public static readonly int RightOffset = 50;
-        //------------------------------
-
-
-        //Operators Text Size
-        public static readonly int FontEqualsHeight = 11;
-        public static readonly int FontEqualsWidth = 8;
-        public static readonly int FontOperationHeight = 8;
-        public static readonly int FontOperationWidth = 8;
-        //------------------------------
 
 
         // Matrix generation
@@ -55,9 +29,9 @@ namespace MatrixOperations
                 for (var j = 0; j < Y; j++)
                 {
                     numericUpDowns[i, j] = new NumericUpDown();
-                    numericUpDowns[i, j].Top = MarginY + i * FieldsTotalHeight;
-                    numericUpDowns[i, j].Left = MarginX + j * FieldsTotalWidth;
-                    numericUpDowns[i, j].Width = FieldsWidth;
+                    numericUpDowns[i, j].Top = MarginY + i * Variables.FieldsTotalHeight;
+                    numericUpDowns[i, j].Left = MarginX + j * Variables.FieldsTotalWidth;
+                    numericUpDowns[i, j].Width = Variables.FieldsWidth;
                     form.Controls.Add(numericUpDowns[i, j]);
                 }
             }
@@ -75,9 +49,9 @@ namespace MatrixOperations
                 for (var j = 0; j < Y; j++)
                 {
                     labels[i, j] = new TextBox();
-                    labels[i, j].Top = MarginY + i * FieldsTotalHeight;
-                    labels[i, j].Left = MarginX + j * FieldsTotalWidth;
-                    labels[i, j].Width = FieldsWidth;
+                    labels[i, j].Top = MarginY + i * Variables.FieldsTotalHeight;
+                    labels[i, j].Left = MarginX + j * Variables.FieldsTotalWidth;
+                    labels[i, j].Width = Variables.FieldsWidth;
                     labels[i, j].Enabled = false;
                     form.Controls.Add(labels[i, j]);
 
@@ -96,12 +70,12 @@ namespace MatrixOperations
             if (XFirstMatrix > XSecondMatrix)
             {
                 MarginFirstMatrix = 0;
-                MarginSecondMatrix = ((XFirstMatrix - XSecondMatrix) * FieldsTotalHeight) /2;
+                MarginSecondMatrix = ((XFirstMatrix - XSecondMatrix) * Variables.FieldsTotalHeight) /2;
 
             }
             else
             {
-                MarginFirstMatrix = ((XSecondMatrix - XFirstMatrix) * FieldsTotalHeight) / 2;
+                MarginFirstMatrix = ((XSecondMatrix - XFirstMatrix) * Variables.FieldsTotalHeight) / 2;
                 MarginSecondMatrix = 0;
             }
             MarginResultMatrix = MarginFirstMatrix;
@@ -117,8 +91,8 @@ namespace MatrixOperations
             // <summary>
             // Generates the first matrix
             //</summary>
-            int MarginXForFirstMatrix = LeftOffset;
-            int MarginYForFirstMatrix = TopOffset + CenterMarginYFirstMatrix;
+            int MarginXForFirstMatrix = Variables.LeftOffset;
+            int MarginYForFirstMatrix = Variables.TopOffset + CenterMarginYFirstMatrix;
 
            
 
@@ -131,8 +105,8 @@ namespace MatrixOperations
             // <summary>
             // Generates the second matrix 
             //</summary>
-            int MarginXForSecondMatrix = LeftOffset + MatrixDistance + YFirstMatrix * FieldsTotalWidth - FieldsPaddingLeft;
-            int MarginYForSecondMatrix = TopOffset + CenterMarginYSecondMatrix;
+            int MarginXForSecondMatrix = Variables.LeftOffset + Variables.MatrixDistance + YFirstMatrix * Variables.FieldsTotalWidth - Variables.FieldsPaddingLeft;
+            int MarginYForSecondMatrix = Variables.TopOffset + CenterMarginYSecondMatrix;
 
 
             return GenerateMatrix(form, XSecondMatrix, YSecondMatrix, MarginXForSecondMatrix,
@@ -145,8 +119,8 @@ namespace MatrixOperations
             //<summary>
             // Generates the resulting matrix
             //</summary>
-            int MarginXForResultMatrix = LeftOffset + 2*MatrixDistance + YFirstMatrix * FieldsTotalWidth  + YSecondMatrix* FieldsTotalWidth - 2*FieldsPaddingLeft;
-            int MarginYForResultMatrix = TopOffset + CenterMarginYResultMatrix;
+            int MarginXForResultMatrix = Variables.LeftOffset + 2*Variables.MatrixDistance + YFirstMatrix * Variables.FieldsTotalWidth  + YSecondMatrix* Variables.FieldsTotalWidth - 2*Variables.FieldsPaddingLeft;
+            int MarginYForResultMatrix = Variables.TopOffset + CenterMarginYResultMatrix;
 
 
            return GenerateDisabledTextBoxMatrix(form,XResultantMatrix, YResultantMatrix, MarginXForResultMatrix,
@@ -158,18 +132,19 @@ namespace MatrixOperations
         // Signs generation
         private static int GenerateOperationSignY(int XFirstMatrix, int XSecondMatrix)
         {
-            return TopOffset + (XFirstMatrix > XSecondMatrix ? (XFirstMatrix * FieldsTotalHeight - FieldsPaddingTop) : (XSecondMatrix * FieldsTotalHeight - FieldsPaddingTop)) / 2 - FontOperationHeight;
+            return Variables.TopOffset + (XFirstMatrix > XSecondMatrix ? (XFirstMatrix * Variables.FieldsTotalHeight - Variables.FieldsPaddingTop) : (XSecondMatrix * Variables.FieldsTotalHeight - Variables.FieldsPaddingTop)) / 2 - Variables.FontOperationHeight;
         }
         private static int GenerateEqualsSignY(int XFirstMatrix, int XSecondMatrix)
         {
-            return TopOffset + (XFirstMatrix > XSecondMatrix ? (XFirstMatrix * FieldsTotalHeight - FieldsPaddingTop) : (XSecondMatrix * FieldsTotalHeight - FieldsPaddingTop)) / 2 - FontEqualsHeight;
+            return Variables.TopOffset + (XFirstMatrix > XSecondMatrix ? (XFirstMatrix * Variables.FieldsTotalHeight - Variables.FieldsPaddingTop) : (XSecondMatrix * Variables.FieldsTotalHeight - Variables.FieldsPaddingTop)) / 2 - Variables.FontEqualsHeight;
         }
         private static int GenerateOperationSignX(int YFirstMatrix)
         {
-            return LeftOffset + YFirstMatrix * FieldsTotalWidth - FieldsPaddingLeft + MatrixDistance/2 - FontOperationWidth;
+            return Variables.LeftOffset + YFirstMatrix * Variables.FieldsTotalWidth - Variables.FieldsPaddingLeft + Variables.MatrixDistance /2 - Variables.FontOperationWidth;
         }
         private static int GenerateEqualsSignX(int YFirstMatrix, int YSecondMatrix) {
-            return LeftOffset + (YFirstMatrix + YSecondMatrix) * FieldsTotalWidth - 2*FieldsPaddingLeft + MatrixDistance + MatrixDistance/2 - FontEqualsWidth;
+            return Variables.LeftOffset + (YFirstMatrix + YSecondMatrix) * Variables.FieldsTotalWidth 
+                - 2*Variables.FieldsPaddingLeft + Variables.MatrixDistance + Variables.MatrixDistance /2 - Variables.FontEqualsWidth;
         }
         private static Label GenerateLabel(int Top, int Left, Size size, string Text)
         {
@@ -190,8 +165,8 @@ namespace MatrixOperations
             int PositionEqualsX = GenerateEqualsSignX(YFirstMatrix,YSecondMatrix);
 
 
-            Label OperationLabel = GenerateLabel(PositionOperationY, PositionOperationX, new Size(FontOperationWidth, FontEqualsHeight), Sign);    
-            Label EqualsLabel = GenerateLabel(PositionEqualsY, PositionEqualsX, new Size(FontEqualsWidth, FontEqualsHeight), "="); ;
+            Label OperationLabel = GenerateLabel(PositionOperationY, PositionOperationX, new Size(Variables.FontOperationWidth, Variables.FontEqualsHeight), Sign);    
+            Label EqualsLabel = GenerateLabel(PositionEqualsY, PositionEqualsX, new Size(Variables.FontEqualsWidth, Variables.FontEqualsHeight), "="); ;
             
             return (OperationLabel,EqualsLabel);
 
@@ -228,14 +203,7 @@ namespace MatrixOperations
         //-------------------------------------------------
 
 
-        // Form dimensions setting
-        public static void SetWidthAndHeight(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix)
-        {
-            (int XResultantMatrix, int YResultantMatrix) = (XFirstMatrix, YSecondMatrix);
-            form.Width = (YFirstMatrix + YSecondMatrix + YResultantMatrix) * FieldsTotalWidth + MatrixDistance * 2 + LeftOffset + RightOffset;
-            form.Height = Math.Max(XFirstMatrix, XSecondMatrix) * FieldsTotalHeight + TopOffset + BottomOffset;
+        
 
-        }
-        //---------------------------------------------------
     }
 }
