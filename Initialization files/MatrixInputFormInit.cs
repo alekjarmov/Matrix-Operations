@@ -32,7 +32,7 @@ namespace MatrixOperations
         public static readonly int TopOffset = 50;
         public static readonly int BottomOffset = 250;
         public static readonly int LeftOffset = 50;
-        public static readonly int RightOffset = 200;
+        public static readonly int RightOffset = 50;
         //------------------------------
 
 
@@ -232,8 +232,8 @@ namespace MatrixOperations
         public static void SetWidthAndHeight(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix)
         {
             (int XResultantMatrix, int YResultantMatrix) = (XFirstMatrix, YSecondMatrix);
-            form.Width = (XFirstMatrix + XSecondMatrix + XResultantMatrix) * FieldsTotalWidth + MatrixDistance * 2 + LeftOffset + RightOffset;
-            form.Height = Math.Max(YFirstMatrix, YSecondMatrix) * FieldsTotalHeight + TopOffset + BottomOffset;
+            form.Width = (YFirstMatrix + YSecondMatrix + YResultantMatrix) * FieldsTotalWidth + MatrixDistance * 2 + LeftOffset + RightOffset;
+            form.Height = Math.Max(XFirstMatrix, XSecondMatrix) * FieldsTotalHeight + TopOffset + BottomOffset;
 
         }
         //---------------------------------------------------
