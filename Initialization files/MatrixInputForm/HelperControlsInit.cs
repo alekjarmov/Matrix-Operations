@@ -65,20 +65,24 @@ namespace MatrixOperations.Initialization_files
 
 
         // Button generation
-        public static Button GenerateAnimationButton(this MatrixInputForm form, int XFirstMatrix, int XSecondMatrix)
+        public static Button GenerateButton(this MatrixInputForm form, int XFirstMatrix, int XSecondMatrix, string Text,EventHandler ClickMethod,int LeftOffset)
         {
-            Button AnimateButton = new Button();
-            AnimateButton.Top = Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset;
-            AnimateButton.Left = Variables.LeftOffset;
-            AnimateButton.Text = "Calculate";
-            AnimateButton.Width = Variables.ButtonWidth;
-            AnimateButton.Height = Variables.ButtonHeight;
-            AnimateButton.Click += form.StartAnimation;
-            form.Controls.Add(AnimateButton);
+            Button Button = new Button();
+            Button.Top = Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset;
+            Button.Left = LeftOffset;
+            Button.Text = Text;
+            Button.Width = Variables.ButtonWidth;
+            Button.Height = Variables.ButtonHeight;
+            Button.Click += ClickMethod;
 
-            return AnimateButton;
+            form.Controls.Add(Button);
+            
+            return Button;
 
         }
         //---------------------------------------------------
+
+
+
     }
 }

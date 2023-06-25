@@ -32,6 +32,7 @@ namespace MatrixOperations
                     numericUpDowns[i, j].Top = MarginY + i * Variables.FieldsTotalHeight;
                     numericUpDowns[i, j].Left = MarginX + j * Variables.FieldsTotalWidth;
                     numericUpDowns[i, j].Width = Variables.FieldsWidth;
+                    numericUpDowns[i, j].Minimum = -10000;
                     form.Controls.Add(numericUpDowns[i, j]);
                 }
             }

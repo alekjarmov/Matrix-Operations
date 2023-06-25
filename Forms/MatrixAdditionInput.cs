@@ -1,4 +1,5 @@
 ﻿using MatrixOperations.Forms.FormTypes;
+using MatrixOperations.Initialization_files;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace MatrixOperations.Forms
         public MatrixAdditionInput(decimal X, decimal Y, string mode) : base()
         {
             InitializeComponent();
+            
             Mode = mode.ToLower();
             string sign = mode == "addition" ? "+" : "-";
             InitializeInputEnvironment((int)X, (int)Y, (int)X, (int)Y, sign);
@@ -26,6 +28,7 @@ namespace MatrixOperations.Forms
         }
         public override async void StartAnimation(object? sender, EventArgs e)
         {
+            base.StartAnimation(sender, e);
             for (int i = 0; i < FirstMatrix.GetLength(0); i++)
             {
                 for (int j = 0; j < FirstMatrix.GetLength(1); j++)
@@ -42,13 +45,14 @@ namespace MatrixOperations.Forms
                             ResultantMatrix[i, j].Text = $"{FirstMatrix[i, j].Value - SecondMatrix[i, j].Value}";
                             break;
                     }
-                    await Task.Delay(1000);
+                    await Task.Delay(Variables.IterationTime);
                     FirstMatrix[i, j].BackColor = Color.White;
                     SecondMatrix[i, j].BackColor = Color.White;
                     ResultantMatrix[i, j].BackColor = Color.White;
 
                 }
             }
+
         }
 
     }

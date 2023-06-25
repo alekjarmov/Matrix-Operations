@@ -1,4 +1,5 @@
 ﻿using MatrixOperations.Forms.FormTypes;
+using MatrixOperations.Initialization_files;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,27 +23,11 @@ namespace MatrixOperations
             
         }
 
-        private void DisableAllNumericUpDowns()
-        {
-            for (int i = 0; i < FirstMatrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < FirstMatrix.GetLength(1); j++)
-                {
-                    FirstMatrix[i, j].Enabled = false;
-                }
-            }
-            for (int i = 0; i < SecondMatrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < SecondMatrix.GetLength(1); j++)
-                {
-                    SecondMatrix[i, j].Enabled = false;
-                }
-            }
-        }
+        
         public override async void StartAnimation(object? sender, EventArgs e)
         {
+            base.StartAnimation(sender, e);
             CalculateButton.Enabled = false;
-            DisableAllNumericUpDowns();
             for (int i = 0; i < FirstMatrix.GetLength(0); i++)
             {
                 for(int x = 0; x < FirstMatrix.GetLength(1); x++)
@@ -70,7 +55,7 @@ namespace MatrixOperations
 
                         ResultantMatrix[i, j].Text = $"{ParsedResultantMatrixText + (FirstMatrix[i, k].Value * SecondMatrix[k, j].Value)}";
 
-                        await Task.Delay(1000);
+                        await Task.Delay(Variables.IterationTime);
                         FirstMatrix[i, k].BackColor = Color.LightGreen;
                         SecondMatrix[k, j].BackColor = Color.LightGreen;
                     }
@@ -78,7 +63,7 @@ namespace MatrixOperations
                     {
                         SecondMatrix[x, j].BackColor = Color.White;
                     }
-                    ResultantMatrix[i, j].BackColor = Color.LightGreen;
+                    ResultantMatrix[i, j].BackColor = Color.White;
 
                 }
                 for (int x = 0; x < FirstMatrix.GetLength(1); x++)
@@ -87,6 +72,8 @@ namespace MatrixOperations
                 }
                 
             }
+
+            EndAnimation();
 
         }
 

@@ -25,9 +25,9 @@ namespace MatrixOperations.Initialization_files
 
         // Offset from the matrices block
         public static readonly int TopOffset = 50;
-        public static readonly int BottomOffset = 250;
+        public static readonly int BottomOffset = 80;
         public static readonly int LeftOffset = 50;
-        public static readonly int RightOffset = 50;
+        public static readonly int RightOffset = 0;
         //------------------------------
 
 
@@ -39,12 +39,21 @@ namespace MatrixOperations.Initialization_files
         //------------------------------
 
         //Button dimensions
-        public static readonly int ButtonWidth = 70;
+        public static readonly int ButtonWidth = 80;
         public static readonly int ButtonHeight = 20;
+        //------------------------------
+
+        // Buttons options
+        public static readonly int ButtonsMarginLeft = 20;
         //------------------------------
 
         // Labels offset
         public static readonly int DistanceFromMatrixes = 30;
         //------------------------------
+
+        // Time between iterations in ms
+        public static readonly int IterationTime = 500;
+        //------------------------------
+        
     }
 }
