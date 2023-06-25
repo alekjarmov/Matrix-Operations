@@ -35,7 +35,12 @@ namespace MatrixOperations.Initialization_files
         public static readonly int FontEqualsHeight = 11;
         public static readonly int FontEqualsWidth = 8;
         public static readonly int FontOperationHeight = 8;
-        public static readonly int FontOperationWidth = 8;
+        public static readonly int FontOperationWidth = 10;
+        //------------------------------
+
+        //Button dimensions
+        public static readonly int ButtonWidth = 70;
+        public static readonly int ButtonHeight = 20;
         //------------------------------
     }
 }

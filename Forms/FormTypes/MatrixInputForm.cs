@@ -21,6 +21,7 @@ namespace MatrixOperations.Forms.FormTypes
         public (NumericUpDown[,], NumericUpDown[,], TextBox[,]) InitializeInputEnvironment(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
         {
             this.SetWidthAndHeight(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix);
+            this.GenerateAnimationButton(XFirstMatrix, XSecondMatrix);
             return this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
         }
     }
