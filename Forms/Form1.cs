@@ -1,3 +1,5 @@
+using MatrixOperations.Forms;
+
 namespace MatrixOperations
 {
     public partial class Form1 : Form
@@ -22,23 +24,18 @@ namespace MatrixOperations
         {
             if (listBoxOptions.SelectedIndex == -1)
             {
-                var mbox = MessageBox.Show("Please select an operation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                MessageBox.Show("Please select an option");
                 return;
             }
 
-            string selectedOption = listBoxOptions.SelectedItem.ToString().ToLower();
+            string selectedOption = listBoxOptions.SelectedItem.ToString();
             switch (selectedOption)
             {
-                case "addition":
-                    AdditionParameters additionParameters = new AdditionParameters(selectedOption);
+                case "Addition":
+                    AdditionParameters additionParameters = new AdditionParameters();
                     additionParameters.Show();
                     break;
-                case "subtraction":
-                    AdditionParameters subtractionParameters = new AdditionParameters(selectedOption);
-                    subtractionParameters.Show();
-                    break;
-                case "multiplication":
+                case "Multiplication":
                     MultiplicationParameters multiplicationParameters = new MultiplicationParameters();
                     multiplicationParameters.Show();
                     break;

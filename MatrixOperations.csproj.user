@@ -4,13 +4,25 @@
     <Compile Update="AdditionParameters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form1.cs">
+    <Compile Update="Forms\AdditionParameters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MatrixMultiplicationInput.cs">
+    <Compile Update="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MultiplicationParameters.cs">
+    <Compile Update="Forms\FormTypes\MatrixInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormTypes\ParameterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MatrixAdditionInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MatrixMultiplicationInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MultiplicationParameters.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
