@@ -19,22 +19,25 @@ namespace MatrixOperations
             : base()
         {
             InitializeComponent();
+
             InitializeInputEnvironment((int)XFirstMatrix, (int)YFirstMatrix, (int)XSecondMatrix, (int)YSecondMatrix, "*");
             
         }
 
         
-        public override async void StartAnimation(object? sender, EventArgs e)
+        
+
+        protected override async Task Animate(CancellationToken token)
         {
-            base.StartAnimation(sender, e);
             CalculateButton.Enabled = false;
+            RandomizeButton.Enabled = false;
             for (int i = 0; i < FirstMatrix.GetLength(0); i++)
             {
-                for(int x = 0; x < FirstMatrix.GetLength(1); x++)
+                for (int x = 0; x < FirstMatrix.GetLength(1); x++)
                 {
                     FirstMatrix[i, x].BackColor = Color.LightGreen;
                 }
-                
+
                 for (int j = 0; j < SecondMatrix.GetLength(1); j++)
                 {
                     for (int x = 0; x < SecondMatrix.GetLength(0); x++)
@@ -43,19 +46,27 @@ namespace MatrixOperations
                     }
                     for (int k = 0; k < SecondMatrix.GetLength(0); k++)
                     {
+                        
                         FirstMatrix[i, k].BackColor = Color.LightPink;
                         SecondMatrix[k, j].BackColor = Color.LightPink;
-                        ResultantMatrix[i,j].BackColor = Color.LightPink;
+                        ResultantMatrix[i, j].BackColor = Color.LightPink;
                         ResultantMatrix[i, j].ForeColor = Color.Black;
                         int ParsedResultantMatrixText = 0;
 
                         if (!ResultantMatrix[i, j].Text.Equals(""))
                             ParsedResultantMatrixText = Int32.Parse(ResultantMatrix[i, j].Text);
-                        System.Diagnostics.Debug.WriteLine(FirstMatrix[i, k].Value);
-
                         ResultantMatrix[i, j].Text = $"{ParsedResultantMatrixText + (FirstMatrix[i, k].Value * SecondMatrix[k, j].Value)}";
-
-                        await Task.Delay(Variables.IterationTime);
+                        try
+                        {
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(Variables.IterationTime);
+                        }
+                        catch (OperationCanceledException ex)
+                        {
+                            ResetColorNumericUpDowns();
+                            ResetResultantMatrix();
+                            return;
+                        }
                         FirstMatrix[i, k].BackColor = Color.LightGreen;
                         SecondMatrix[k, j].BackColor = Color.LightGreen;
                     }
@@ -70,12 +81,9 @@ namespace MatrixOperations
                 {
                     FirstMatrix[i, x].BackColor = Color.White;
                 }
-                
+
             }
 
-            EndAnimation();
-
         }
-
     }
 }

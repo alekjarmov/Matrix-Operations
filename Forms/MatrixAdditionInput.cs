@@ -26,13 +26,16 @@ namespace MatrixOperations.Forms
 
 
         }
-        public override async void StartAnimation(object? sender, EventArgs e)
+
+        protected override async Task Animate(CancellationToken token)
         {
-            base.StartAnimation(sender, e);
+            CalculateButton.Enabled = false;
+            RandomizeButton.Enabled = false;
             for (int i = 0; i < FirstMatrix.GetLength(0); i++)
             {
                 for (int j = 0; j < FirstMatrix.GetLength(1); j++)
                 {
+                    
                     FirstMatrix[i, j].BackColor = Color.LightGreen;
                     SecondMatrix[i, j].BackColor = Color.LightGreen;
                     ResultantMatrix[i, j].BackColor = Color.LightGreen;
@@ -45,15 +48,28 @@ namespace MatrixOperations.Forms
                             ResultantMatrix[i, j].Text = $"{FirstMatrix[i, j].Value - SecondMatrix[i, j].Value}";
                             break;
                     }
-                    await Task.Delay(Variables.IterationTime);
-                    FirstMatrix[i, j].BackColor = Color.White;
-                    SecondMatrix[i, j].BackColor = Color.White;
-                    ResultantMatrix[i, j].BackColor = Color.White;
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(Variables.IterationTime);
+                    }
+                    catch (OperationCanceledException ex)
+                    {
+                        ResetColorNumericUpDowns();
+                        ResetResultantMatrix();
+                        return;
+                    }
 
+
+
+                    FirstMatrix[i, j].BackColor = Color.White;
+                SecondMatrix[i, j].BackColor = Color.White;
+                ResultantMatrix[i, j].BackColor = Color.White;
                 }
             }
-
+            
         }
+    
 
     }
 }
