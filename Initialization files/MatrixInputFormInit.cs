@@ -15,21 +15,25 @@ namespace MatrixOperations
 
         // Properites per field
         public static readonly int FieldsWidth = 30;
-        //Default height per textBox and numericalUpDown
-        public static readonly int FieldsHeight = 23;
+        public static readonly int FieldsHeight = 23; //Default height per textBox and numericalUpDown
         public static readonly int FieldsPaddingLeft = 20;
         public static readonly int FieldsPaddingTop = 20;
         public static readonly int FieldsTotalHeight = FieldsHeight + FieldsPaddingTop;
         public static readonly int FieldsTotalWidth = FieldsWidth + FieldsPaddingLeft;
+        //------------------------------
+        
 
         // Distance between matrices
         public static readonly int MatrixDistance = 50;
+        //------------------------------
+
 
         // Offset from the matrices block
         public static readonly int TopOffset = 50;
         public static readonly int BottomOffset = 250;
         public static readonly int LeftOffset = 50;
         public static readonly int RightOffset = 200;
+        //------------------------------
 
 
         //Operators Text Size
@@ -37,7 +41,10 @@ namespace MatrixOperations
         public static readonly int FontEqualsWidth = 8;
         public static readonly int FontOperationHeight = 8;
         public static readonly int FontOperationWidth = 8;
+        //------------------------------
 
+
+        // Matrix generation
         public static NumericUpDown[,] GenerateMatrix(MatrixInputForm form, int X, int Y, 
                                     int MarginX,int MarginY)
         {
@@ -79,6 +86,10 @@ namespace MatrixOperations
 
             return labels;
         }
+        //--------------------------------------------
+
+
+        // Centering Matrices
         private static (int,int,int) GetCenteringMargins(int XFirstMatrix, int XSecondMatrix)
         {
             int MarginFirstMatrix, MarginSecondMatrix,MarginResultMatrix;
@@ -97,8 +108,10 @@ namespace MatrixOperations
             return (MarginFirstMatrix, MarginSecondMatrix, MarginResultMatrix);
 
         }
+        //----------------------------------------------
 
-       
+
+        // Generating the three matrices
         private static NumericUpDown[,] GenerateFirstMatrix(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int CenterMarginYFirstMatrix)
         {
             // <summary>
@@ -113,7 +126,6 @@ namespace MatrixOperations
                 MarginYForFirstMatrix);
 
         }
-
         private static NumericUpDown[,] GenerateSecondMatrix(this MatrixInputForm form, int XSecondMatrix, int YSecondMatrix, int YFirstMatrix, int CenterMarginYSecondMatrix)
         {
             // <summary>
@@ -127,7 +139,6 @@ namespace MatrixOperations
                 MarginYForSecondMatrix);
 
         }
-
         private static TextBox[,] GenerateResultingMatrix(this MatrixInputForm form, int XResultantMatrix, int YResultantMatrix, int YFirstMatrix, int YSecondMatrix, int CenterMarginYResultMatrix)
                                                         
         {
@@ -141,31 +152,10 @@ namespace MatrixOperations
            return GenerateDisabledTextBoxMatrix(form,XResultantMatrix, YResultantMatrix, MarginXForResultMatrix,
                 MarginYForResultMatrix);
         }
-        public static (NumericUpDown[,], NumericUpDown[,], TextBox[,]) GenerateMatrices(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
-        {
-            //<summary>
-            // Generate the first operand matrix, the second operand matrix and the result matrix.
-            //</summary>
-
-            (int XResultantMatrix, int YResultantMatrix) = (XFirstMatrix, YSecondMatrix);
-
-            (int CenterMarginYFirstMatrix, int CenterMarginYSecondMatrix, int CenterMarginYResultMatrix) = GetCenteringMargins(XFirstMatrix, XSecondMatrix);
-
-            NumericUpDown[,] FirstMatrix = form.GenerateFirstMatrix(XFirstMatrix, YFirstMatrix, CenterMarginYFirstMatrix);
-
-            NumericUpDown[,] SecondMatrix = form.GenerateSecondMatrix(XSecondMatrix, YSecondMatrix, YFirstMatrix, CenterMarginYSecondMatrix);
-
-            TextBox[,] ResultMatrix = form.GenerateResultingMatrix(XResultantMatrix,YResultantMatrix,YFirstMatrix,YSecondMatrix, CenterMarginYResultMatrix);
+        //---------------------------------------------------------
 
 
-            (Label Operation, Label Equals) = GenerateSigns(XFirstMatrix,YFirstMatrix,XSecondMatrix,YSecondMatrix, Sign);
-            form.Controls.Add(Operation);
-            form.Controls.Add(Equals);
-
-
-            return (FirstMatrix, SecondMatrix, ResultMatrix);
-
-        }
+        // Signs generation
         private static int GenerateOperationSignY(int XFirstMatrix, int XSecondMatrix)
         {
             return TopOffset + (XFirstMatrix > XSecondMatrix ? (XFirstMatrix * FieldsTotalHeight - FieldsPaddingTop) : (XSecondMatrix * FieldsTotalHeight - FieldsPaddingTop)) / 2 - FontOperationHeight;
@@ -206,9 +196,39 @@ namespace MatrixOperations
             return (OperationLabel,EqualsLabel);
 
         }
+        //------------------------------------------------
 
-        
 
+        // Main generation method
+        public static (NumericUpDown[,], NumericUpDown[,], TextBox[,]) GenerateMatrices(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
+        {
+            //<summary>
+            // Generate the first operand matrix, the second operand matrix and the result matrix.
+            //</summary>
+
+            (int XResultantMatrix, int YResultantMatrix) = (XFirstMatrix, YSecondMatrix);
+
+            (int CenterMarginYFirstMatrix, int CenterMarginYSecondMatrix, int CenterMarginYResultMatrix) = GetCenteringMargins(XFirstMatrix, XSecondMatrix);
+
+            NumericUpDown[,] FirstMatrix = form.GenerateFirstMatrix(XFirstMatrix, YFirstMatrix, CenterMarginYFirstMatrix);
+
+            NumericUpDown[,] SecondMatrix = form.GenerateSecondMatrix(XSecondMatrix, YSecondMatrix, YFirstMatrix, CenterMarginYSecondMatrix);
+
+            TextBox[,] ResultMatrix = form.GenerateResultingMatrix(XResultantMatrix, YResultantMatrix, YFirstMatrix, YSecondMatrix, CenterMarginYResultMatrix);
+
+
+            (Label Operation, Label Equals) = GenerateSigns(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
+            form.Controls.Add(Operation);
+            form.Controls.Add(Equals);
+
+
+            return (FirstMatrix, SecondMatrix, ResultMatrix);
+
+        }
+        //-------------------------------------------------
+
+
+        // Form dimensions setting
         public static void SetWidthAndHeight(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix)
         {
             (int XResultantMatrix, int YResultantMatrix) = (XFirstMatrix, YSecondMatrix);
@@ -216,5 +236,6 @@ namespace MatrixOperations
             form.Height = Math.Max(YFirstMatrix, YSecondMatrix) * FieldsTotalHeight + TopOffset + BottomOffset;
 
         }
+        //---------------------------------------------------
     }
 }
