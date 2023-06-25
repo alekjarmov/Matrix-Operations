@@ -21,7 +21,8 @@ namespace MatrixOperations
         {
             InitializeComponent();
             this.SetWidthAndHeight((int)XFirstMatrix, (int)YFirstMatrix, (int)XSecondMatrix, (int)YSecondMatrix);
-            this.GenerateMatrices((int)XFirstMatrix, (int)YFirstMatrix, (int)XSecondMatrix, (int)YSecondMatrix);
+            (NumericUpDown[,] FirstMatrix, NumericUpDown[,] SecondMatrix, TextBox[,] ResultantMatrix) = 
+                this.GenerateMatrices((int)XFirstMatrix, (int)YFirstMatrix, (int)XSecondMatrix, (int)YSecondMatrix, "*");
 
         }
     }
