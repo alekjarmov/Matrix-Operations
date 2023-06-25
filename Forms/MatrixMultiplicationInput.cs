@@ -41,18 +41,26 @@ namespace MatrixOperations
         }
         public override async void StartAnimation(object? sender, EventArgs e)
         {
+            CalculateButton.Enabled = false;
             DisableAllNumericUpDowns();
             for (int i = 0; i < FirstMatrix.GetLength(0); i++)
             {
-
+                for(int x = 0; x < FirstMatrix.GetLength(1); x++)
+                {
+                    FirstMatrix[i, x].BackColor = Color.LightGreen;
+                }
                 
                 for (int j = 0; j < SecondMatrix.GetLength(1); j++)
                 {
+                    for (int x = 0; x < SecondMatrix.GetLength(0); x++)
+                    {
+                        SecondMatrix[x, j].BackColor = Color.LightGreen;
+                    }
                     for (int k = 0; k < SecondMatrix.GetLength(0); k++)
                     {
-                        FirstMatrix[i, k].BackColor = Color.LightGreen;
-                        SecondMatrix[k, j].BackColor = Color.LightGreen;
-                        ResultantMatrix[i,j].BackColor = Color.LightGreen;
+                        FirstMatrix[i, k].BackColor = Color.LightPink;
+                        SecondMatrix[k, j].BackColor = Color.LightPink;
+                        ResultantMatrix[i,j].BackColor = Color.LightPink;
                         ResultantMatrix[i, j].ForeColor = Color.Black;
                         int ParsedResultantMatrixText = 0;
 
@@ -63,11 +71,23 @@ namespace MatrixOperations
                         ResultantMatrix[i, j].Text = $"{ParsedResultantMatrixText + (FirstMatrix[i, k].Value * SecondMatrix[k, j].Value)}";
 
                         await Task.Delay(1000);
-                        FirstMatrix[i, k].BackColor = Color.LightGray;
-                        SecondMatrix[k, j].BackColor = Color.LightGray;
+                        FirstMatrix[i, k].BackColor = Color.LightGreen;
+                        SecondMatrix[k, j].BackColor = Color.LightGreen;
                     }
+                    for (int x = 0; x < SecondMatrix.GetLength(0); x++)
+                    {
+                        SecondMatrix[x, j].BackColor = Color.White;
+                    }
+                    ResultantMatrix[i, j].BackColor = Color.LightGreen;
+
                 }
+                for (int x = 0; x < FirstMatrix.GetLength(1); x++)
+                {
+                    FirstMatrix[i, x].BackColor = Color.White;
+                }
+                
             }
+
         }
 
     }
