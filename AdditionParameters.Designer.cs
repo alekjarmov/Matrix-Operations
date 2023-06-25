@@ -99,6 +99,7 @@
             Controls.Add(XFirstMatrix);
             Name = "AdditionParameters";
             Text = "Dimensions";
+            Load += AdditionParameters_Load;
             ((System.ComponentModel.ISupportInitialize)YFirstMatrix).EndInit();
             ((System.ComponentModel.ISupportInitialize)XFirstMatrix).EndInit();
             ResumeLayout(false);

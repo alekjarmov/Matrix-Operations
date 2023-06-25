@@ -28,7 +28,9 @@ namespace MatrixOperations
         private void MatrixInput_Click(object sender, EventArgs e)
         {
             MultiplicationAnimation form = new MultiplicationAnimation(XFirstMatrix.Value, YFirstMatrix.Value, XSecondMatrix.Value, YSecondMatrix.Value);
+            this.Close();
             form.ShowDialog();
+            
 
         }
         private void label1_Click(object sender, EventArgs e)

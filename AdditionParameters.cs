@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MatrixOperations.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,6 +30,13 @@ namespace MatrixOperations
         }
 
         private void MatrixInput_Click(object sender, EventArgs e)
+        {
+            MatrixAdditionInput form = new MatrixAdditionInput(XFirstMatrix.Value, YFirstMatrix.Value);
+            this.Close();
+            form.ShowDialog();
+        }
+
+        private void AdditionParameters_Load(object sender, EventArgs e)
         {
 
         }
