@@ -45,12 +45,68 @@ private void XSecondMatrix_ValueChanged(object sender, EventArgs e)
 На делот каде што се внесуваат двете матрици врз кои што сакаме да направиме една од операциите собирање, одземање или множење се понудени опции кои што треба да го подобрат искуството на корисникот, како на пример можноста да се избришат сите моментално внесени вредности или пак да се наполнат матриците со случајно генерирани вредности. Освен ова корисникот може да ја менува брзината на анимацијата која што го прикажува процесот за извршување на калкулација.
 
 ## Имплементација и податочни структури
-Како главна податочна структура која што ја користиме е абстрактна форма која што треба да исцртува 2 матрици во кои што може да се внеусваат вредности за калкулација, како и трета матрица која што го претставува резултатот на операциите. Оваа абстрактна форма ја наследуваат формите за множење и собирање/делење. Има еднa форма за множење и една форма за собирање и делење, бидејќи кај собирање и одземање треба да бидат исти димензиите на двете форми-операнди може да се претстават во една форма, само плус оваа форма има променлива `Mode` која што ги зима вредностите "subtraction" или "addition" и само според тоа врши различна калкулација. Главната функција која што треба да се презапише е `Animate(CancellationToken token)`. Елементите кои што ги има абстрактната форма се следните:
+Апликацијата е составена од неколку форми, првата форма е иницијалната каде што бираме каква операција сакаме да направиме, додека пак следните форми се за внес за одредени информации потребни за бараната операција. Како главна податочна структура која што ја користиме е абстрактна форма која што треба да исцртува 2 матрици во кои што може да се внеусваат вредности за калкулација, како и трета матрица која што го претставува резултатот на операциите. Оваа абстрактна форма ја наследуваат формите за множење и собирање/делење. Има еднa форма за множење и една форма за собирање и делење, бидејќи кај собирање и одземање треба да бидат исти димензиите на двете форми-операнди може да се претстават во една форма, само плус оваа форма има променлива `Mode` која што ги зима вредностите "subtraction" или "addition" и само според тоа врши различна калкулација. Главната функција која што треба да се презапише е `Animate(CancellationToken token)`. Елементите кои што ги има абстрактната форма се следните:
 ```csharp
+public abstract partial class MatrixInputForm : Form
+    {
+        protected NumericUpDown[,] FirstMatrix;
+        protected NumericUpDown[,] SecondMatrix;
+        protected TextBox[,] ResultantMatrix;
+        protected Button CalculateButton;
+        protected Button RandomizeButton;
+        protected Button ClearButton;
+        protected int XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix;
+        protected string Sign;
+        protected CancellationTokenSource IterationToken;
+        protected TrackBar IterationSpeedPercentage;
+        public MatrixInputForm()
+        {
 
+        }
+        ...
 ```
+Функцијата `Animate()` во формата за собирање и одземање е имплементирана на следниот начин:
+```csharp
+ protected override async Task Animate(CancellationToken token)
+        {
+            CalculateButton.Enabled = false;
+            RandomizeButton.Enabled = false;
+            for (int i = 0; i < FirstMatrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < FirstMatrix.GetLength(1); j++)
+                {
+                    FirstMatrix[i, j].BackColor = Color.LightGreen;
+                    SecondMatrix[i, j].BackColor = Color.LightGreen;
+                    ResultantMatrix[i, j].BackColor = Color.LightGreen;
+                    switch (Mode)
+                    {
+                        case "addition":
+                            ResultantMatrix[i, j].Text = $"{FirstMatrix[i, j].Value + SecondMatrix[i, j].Value}";
+                            break;
+                        case "subtraction":
+                            ResultantMatrix[i, j].Text = $"{FirstMatrix[i, j].Value - SecondMatrix[i, j].Value}";
+                            break;
+                    }
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(this.CalculateDelay());
+                    }
+                    catch (OperationCanceledException ex)
+                    {
+                        ResetColorNumericUpDowns();
+                        ResetResultantMatrix();
+                        return;
+                    }
+                FirstMatrix[i, j].BackColor = Color.White;
+                SecondMatrix[i, j].BackColor = Color.White;
+                ResultantMatrix[i, j].BackColor = Color.White;
+                }
+            }
 
-Функцијата која што ги прави и прикажува калкулациите за множење на 2 матрици е следнава:
+        }
+```
+Додека пак функцијата `Animate()` во формата за множење е имплементирана на следниот начин:
 ```csharp
 protected override async Task Animate(CancellationToken token)
         {
@@ -110,3 +166,4 @@ protected override async Task Animate(CancellationToken token)
             }
         }
 ```
+### Изглед/Приказ на апликацијата
