@@ -11,16 +11,11 @@ using MatrixOperations.Initialization_files;
 
 namespace MatrixOperations
 {
-    public static class MatrixInit 
+    public static class MatrixInit
     {
-        
-
-        
-
-
         // Matrix generation
-        public static NumericUpDown[,] GenerateMatrix(MatrixInputForm form, int X, int Y, 
-                                    int MarginX,int MarginY)
+        public static NumericUpDown[,] GenerateMatrix(MatrixInputForm form, int X, int Y,
+                                    int MarginX, int MarginY)
         {
             NumericUpDown[,] numericUpDowns = new NumericUpDown[X, Y];
 
@@ -65,13 +60,13 @@ namespace MatrixOperations
 
 
         // Centering Matrices
-        private static (int,int,int) GetCenteringMargins(int XFirstMatrix, int XSecondMatrix)
+        private static (int, int, int) GetCenteringMargins(int XFirstMatrix, int XSecondMatrix)
         {
-            int MarginFirstMatrix, MarginSecondMatrix,MarginResultMatrix;
+            int MarginFirstMatrix, MarginSecondMatrix, MarginResultMatrix;
             if (XFirstMatrix > XSecondMatrix)
             {
                 MarginFirstMatrix = 0;
-                MarginSecondMatrix = ((XFirstMatrix - XSecondMatrix) * Variables.FieldsTotalHeight) /2;
+                MarginSecondMatrix = ((XFirstMatrix - XSecondMatrix) * Variables.FieldsTotalHeight) / 2;
 
             }
             else
@@ -95,7 +90,7 @@ namespace MatrixOperations
             int MarginXForFirstMatrix = Variables.LeftOffset;
             int MarginYForFirstMatrix = Variables.TopOffset + CenterMarginYFirstMatrix;
 
-           
+
 
             return GenerateMatrix(form, XFirstMatrix, YFirstMatrix, MarginXForFirstMatrix,
                 MarginYForFirstMatrix);
@@ -115,17 +110,17 @@ namespace MatrixOperations
 
         }
         private static TextBox[,] GenerateResultingMatrix(this MatrixInputForm form, int XResultantMatrix, int YResultantMatrix, int YFirstMatrix, int YSecondMatrix, int CenterMarginYResultMatrix)
-                                                        
+
         {
             //<summary>
             // Generates the resulting matrix
             //</summary>
-            int MarginXForResultMatrix = Variables.LeftOffset + 2*Variables.MatrixDistance + YFirstMatrix * Variables.FieldsTotalWidth  + YSecondMatrix* Variables.FieldsTotalWidth - 2*Variables.FieldsPaddingLeft;
+            int MarginXForResultMatrix = Variables.LeftOffset + 2 * Variables.MatrixDistance + YFirstMatrix * Variables.FieldsTotalWidth + YSecondMatrix * Variables.FieldsTotalWidth - 2 * Variables.FieldsPaddingLeft;
             int MarginYForResultMatrix = Variables.TopOffset + CenterMarginYResultMatrix;
 
 
-           return GenerateDisabledTextBoxMatrix(form,XResultantMatrix, YResultantMatrix, MarginXForResultMatrix,
-                MarginYForResultMatrix);
+            return GenerateDisabledTextBoxMatrix(form, XResultantMatrix, YResultantMatrix, MarginXForResultMatrix,
+                 MarginYForResultMatrix);
         }
         //---------------------------------------------------------
 
@@ -141,11 +136,12 @@ namespace MatrixOperations
         }
         private static int GenerateOperationSignX(int YFirstMatrix)
         {
-            return Variables.LeftOffset + YFirstMatrix * Variables.FieldsTotalWidth - Variables.FieldsPaddingLeft + Variables.MatrixDistance /2 - Variables.FontOperationWidth;
+            return Variables.LeftOffset + YFirstMatrix * Variables.FieldsTotalWidth - Variables.FieldsPaddingLeft + Variables.MatrixDistance / 2 - Variables.FontOperationWidth;
         }
-        private static int GenerateEqualsSignX(int YFirstMatrix, int YSecondMatrix) {
-            return Variables.LeftOffset + (YFirstMatrix + YSecondMatrix) * Variables.FieldsTotalWidth 
-                - 2*Variables.FieldsPaddingLeft + Variables.MatrixDistance + Variables.MatrixDistance /2 - Variables.FontEqualsWidth;
+        private static int GenerateEqualsSignX(int YFirstMatrix, int YSecondMatrix)
+        {
+            return Variables.LeftOffset + (YFirstMatrix + YSecondMatrix) * Variables.FieldsTotalWidth
+                - 2 * Variables.FieldsPaddingLeft + Variables.MatrixDistance + Variables.MatrixDistance / 2 - Variables.FontEqualsWidth;
         }
         private static Label GenerateLabel(int Top, int Left, Size size, string Text)
         {
@@ -157,19 +153,19 @@ namespace MatrixOperations
 
             return label;
         }
-        private static (Label,Label) GenerateSigns(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
+        private static (Label, Label) GenerateSigns(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
         {
             //int SignsY = GenerateSignsY(XFirstMatrix,XSecondMatrix);
-            int PositionOperationY= GenerateOperationSignY(XFirstMatrix, XSecondMatrix);
+            int PositionOperationY = GenerateOperationSignY(XFirstMatrix, XSecondMatrix);
             int PositionEqualsY = GenerateEqualsSignY(XFirstMatrix, XSecondMatrix);
             int PositionOperationX = GenerateOperationSignX(YFirstMatrix);
-            int PositionEqualsX = GenerateEqualsSignX(YFirstMatrix,YSecondMatrix);
+            int PositionEqualsX = GenerateEqualsSignX(YFirstMatrix, YSecondMatrix);
 
 
-            Label OperationLabel = GenerateLabel(PositionOperationY, PositionOperationX, new Size(Variables.FontOperationWidth, Variables.FontEqualsHeight), Sign);    
+            Label OperationLabel = GenerateLabel(PositionOperationY, PositionOperationX, new Size(Variables.FontOperationWidth, Variables.FontEqualsHeight), Sign);
             Label EqualsLabel = GenerateLabel(PositionEqualsY, PositionEqualsX, new Size(Variables.FontEqualsWidth, Variables.FontEqualsHeight), "="); ;
-            
-            return (OperationLabel,EqualsLabel);
+
+            return (OperationLabel, EqualsLabel);
 
         }
         //------------------------------------------------
@@ -204,7 +200,7 @@ namespace MatrixOperations
         //-------------------------------------------------
 
 
-        
+
 
     }
 }

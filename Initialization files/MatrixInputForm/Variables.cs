@@ -53,7 +53,9 @@ namespace MatrixOperations.Initialization_files
         //------------------------------
 
         // Time between iterations in ms
-        public static int IterationTime = 500;
+        public static readonly int MinimumIterationTime = 1;
+        public static readonly int MaximumIterationTime = 1000;
+        public static int IterationPercentage = 50;
         //------------------------------
         
     }

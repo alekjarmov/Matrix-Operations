@@ -25,5 +25,8 @@
     <Compile Update="Forms\MultiplicationParameters.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\trackbartest.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

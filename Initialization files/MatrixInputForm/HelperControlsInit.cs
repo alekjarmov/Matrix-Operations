@@ -48,7 +48,6 @@ namespace MatrixOperations.Initialization_files
             form.GenerateFirstMatrixLabel(YFirstMatrix);
             form.GenerateSecondMatrixLabel(YFirstMatrix, YSecondMatrix);
             form.GenerateResultantMatrixLabel(YFirstMatrix,YSecondMatrix);
-
         }
         //---------------------------------------------------
 
@@ -82,27 +81,28 @@ namespace MatrixOperations.Initialization_files
         }
         //---------------------------------------------------
 
-        // Generate NumericalUpDown for Speed
-        public static NumericUpDown GenerateNumericUpDownAndLabel(this MatrixInputForm form, int Top, int Left, int StartingValue, EventHandler OnChange, string LabelText)
+        // Generate TrackBar for Speed
+
+        public static TrackBar GenerateTrackBar(this MatrixInputForm form, int Top, int Left, int StartingValue, EventHandler OnChange, string LabelText)
         {
             Label label = new Label();
             label.Top = Top;
             label.Left = Left;
-            label.Text = LabelText; 
+            label.Text = LabelText;
+            label.Width = label.Text.Length * 6; // this is a magic number, but it works
             form.Controls.Add(label);
 
-            NumericUpDown NumericUpDown = new NumericUpDown();
-            NumericUpDown.Top = Top;
-            NumericUpDown.Maximum = 100000;
-            NumericUpDown.Left = Left + label.Width;  
-            NumericUpDown.Value = StartingValue;
-            NumericUpDown.ValueChanged += OnChange;
-            form.Controls.Add(NumericUpDown);
+            TrackBar TrackBar = new TrackBar();
+            TrackBar.Top = Top;
+            TrackBar.Left = Left + label.Width;
+            TrackBar.Maximum = 100;
+            TrackBar.Width = Variables.ButtonWidth * 3; 
+            TrackBar.Value = Variables.IterationPercentage;
+            TrackBar.ValueChanged += OnChange;
+            form.Controls.Add(TrackBar);
 
-            return NumericUpDown;
+            return TrackBar;
         }
-
-
 
     }
 }

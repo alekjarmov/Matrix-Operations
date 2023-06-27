@@ -22,7 +22,7 @@ namespace MatrixOperations.Forms.FormTypes
         protected int XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix;
         protected string Sign;
         protected CancellationTokenSource IterationToken;
-        protected NumericUpDown IterationSpeed;
+        protected TrackBar IterationSpeedPercentage;
         public MatrixInputForm()
         {
 
@@ -71,7 +71,7 @@ namespace MatrixOperations.Forms.FormTypes
                     ResultantMatrix[i, j].Text = "";
                 }
             }
-            
+
         }
         protected abstract Task Animate(CancellationToken token);
         public void InitializeInputEnvironment(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
@@ -88,27 +88,28 @@ namespace MatrixOperations.Forms.FormTypes
             RandomizeButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Randomize", RandomizeInputs,
                 Variables.LeftOffset + Variables.ButtonsMarginLeft + CalculateButton.Width);
             ClearButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Clear", GenerateAllInputs,
-                Variables.LeftOffset + 2*Variables.ButtonsMarginLeft + 2*CalculateButton.Width);
+                Variables.LeftOffset + 2 * Variables.ButtonsMarginLeft + 2 * CalculateButton.Width);
 
-            IterationSpeed = this.GenerateNumericUpDownAndLabel(
+
+            IterationSpeedPercentage = this.GenerateTrackBar(
                 Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset + CalculateButton.Height + Variables.ButtonsMarginBottom,
                 Variables.LeftOffset,
-                Variables.IterationTime,
+                Variables.IterationPercentage,
                 UpdateIterationSpeed,
                 "Speed: ");
 
-            this.GenerateLabels(YFirstMatrix,YSecondMatrix);
+            this.GenerateLabels(YFirstMatrix, YSecondMatrix);
         }
         public void UpdateIterationSpeed(object? sender, EventArgs e)
         {
-            Variables.IterationTime = (int)IterationSpeed.Value;
+            Variables.IterationPercentage = (int)IterationSpeedPercentage.Value;
         }
         public void RandomizeInputs(object? sender, EventArgs e)
         {
             Random random = new Random();
             for (int k = 0; k < FirstMatrix.GetLength(0); k++)
                 for (int l = 0; l < FirstMatrix.GetLength(1); l++)
-                    FirstMatrix[k, l].Value = random.Next(100)*(random.Next(2)%2==0 ? -1 : 1);
+                    FirstMatrix[k, l].Value = random.Next(100) * (random.Next(2) % 2 == 0 ? -1 : 1);
             for (int k = 0; k < SecondMatrix.GetLength(0); k++)
                 for (int l = 0; l < SecondMatrix.GetLength(1); l++)
                     SecondMatrix[k, l].Value = random.Next(100) * (random.Next(2) % 2 == 0 ? -1 : 1);
@@ -116,7 +117,7 @@ namespace MatrixOperations.Forms.FormTypes
 
         public void GenerateAllInputs(object? sender, EventArgs e)
         {
-            if(IterationToken!=null)
+            if (IterationToken != null)
                 IterationToken.Cancel();
             IterationToken = null;
             Controls.Clear();
@@ -127,10 +128,10 @@ namespace MatrixOperations.Forms.FormTypes
                 Variables.LeftOffset + Variables.ButtonsMarginLeft + CalculateButton.Width);
             ClearButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Clear", GenerateAllInputs,
                 Variables.LeftOffset + 2 * Variables.ButtonsMarginLeft + 2 * CalculateButton.Width);
-            IterationSpeed = this.GenerateNumericUpDownAndLabel(
+            IterationSpeedPercentage = this.GenerateTrackBar(
                 Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset + CalculateButton.Height + Variables.ButtonsMarginBottom,
                 Variables.LeftOffset,
-                Variables.IterationTime,
+                Variables.IterationPercentage,
                 UpdateIterationSpeed,
                 "Speed: ");
             ResetColorNumericUpDowns();
@@ -142,27 +143,30 @@ namespace MatrixOperations.Forms.FormTypes
         {
             CalculateButton.Enabled = false;
             RandomizeButton.Enabled = false;
-            IterationSpeed.Enabled = false;
+            // IterationSpeedPercentage.Enabled = false;
 
             EnableAllNumericUpDowns(false);
             IterationToken = new CancellationTokenSource();
-            
+
             await Animate(IterationToken.Token);
-            
+
             EndAnimation();
-            
-            
 
         }
         public void EndAnimation()
         {
             CalculateButton.Enabled = true;
             RandomizeButton.Enabled = true;
-            IterationSpeed.Enabled = true;
+            IterationSpeedPercentage.Enabled = true;
 
             EnableAllNumericUpDowns();
-            
+        }
 
+        public int CalculateDelay()
+        {
+            double inverse = 1 - Variables.IterationPercentage / 100.00;
+            int delta = Variables.MaximumIterationTime - Variables.MinimumIterationTime;
+            return (int)(Variables.MinimumIterationTime + inverse * delta);
         }
     }
 }

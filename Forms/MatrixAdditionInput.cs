@@ -51,7 +51,7 @@ namespace MatrixOperations.Forms
                     try
                     {
                         token.ThrowIfCancellationRequested();
-                        await Task.Delay(Variables.IterationTime);
+                        await Task.Delay(this.CalculateDelay());
                     }
                     catch (OperationCanceledException ex)
                     {
