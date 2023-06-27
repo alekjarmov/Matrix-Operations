@@ -31,6 +31,7 @@ namespace MatrixOperations
         {
             CalculateButton.Enabled = false;
             RandomizeButton.Enabled = false;
+            this.ResetResultantMatrix();
             for (int i = 0; i < FirstMatrix.GetLength(0); i++)
             {
                 for (int x = 0; x < FirstMatrix.GetLength(1); x++)
