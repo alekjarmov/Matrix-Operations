@@ -166,4 +166,10 @@ protected override async Task Animate(CancellationToken token)
             }
         }
 ```
-### Изглед/Приказ на апликацијата
+## Изглед/Приказ на апликацијата
+### Собирање
+![](https://github.com/alekjarmov/Matrix-Operations/blob/main/documentation/addition.gif)
+### Одземање
+![](https://github.com/alekjarmov/Matrix-Operations/blob/main/documentation/subtraction.gif)
+### Множење
+![](https://github.com/alekjarmov/Matrix-Operations/blob/main/documentation/multiplication.gif)
