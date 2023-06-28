@@ -25,7 +25,7 @@ namespace MatrixOperations.Forms.FormTypes
         protected TrackBar IterationSpeedPercentage;
         public MatrixInputForm()
         {
-
+            FormBorderStyle = FormBorderStyle.FixedSingle;
         }
         protected void EnableAllNumericUpDowns(bool Enable = true)
         {

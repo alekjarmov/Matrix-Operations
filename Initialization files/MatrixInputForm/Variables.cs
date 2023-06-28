@@ -9,7 +9,7 @@ namespace MatrixOperations.Initialization_files
     public class Variables
     {
         // Properites per field
-        public static readonly int FieldsWidth = 50;
+        public static readonly int FieldsWidth = 80;
         public static readonly int FieldsHeight = 23; //Default height per textBox and numericalUpDown
         public static readonly int FieldsPaddingLeft = 10;
         public static readonly int FieldsPaddingTop = 10;
@@ -26,8 +26,8 @@ namespace MatrixOperations.Initialization_files
         // Offset from the matrices block
         public static readonly int TopOffset = 50;
         public static readonly int BottomOffset = 120;
-        public static readonly int LeftOffset = 30;
-        public static readonly int RightOffset = 0;
+        public static readonly int LeftOffset = 65;
+        public static readonly int RightOffset = 65;
         //------------------------------
 
 
@@ -40,7 +40,7 @@ namespace MatrixOperations.Initialization_files
 
         //Button dimensions
         public static readonly int ButtonWidth = 80;
-        public static readonly int ButtonHeight = 20;
+        public static readonly int ButtonHeight = 30;
         //------------------------------
 
         // Buttons options
