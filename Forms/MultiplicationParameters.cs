@@ -15,12 +15,13 @@ namespace MatrixOperations
         public MultiplicationParameters()
         {
             InitializeComponent();
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             var inputs = new NumericUpDown[] { XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix };
 
             foreach (var input in inputs)
             {
                 input.Minimum = 1;
-                input.Maximum = 10;
+                input.Maximum = 6;
                 input.Value = 1;
             }
 
@@ -30,7 +31,7 @@ namespace MatrixOperations
             MatrixMultiplicationInput form = new MatrixMultiplicationInput(XFirstMatrix.Value, YFirstMatrix.Value, XSecondMatrix.Value, YSecondMatrix.Value);
             this.Close();
             form.ShowDialog();
-            
+
 
         }
         private void label1_Click(object sender, EventArgs e)

@@ -70,7 +70,7 @@
             // YFirstMatrix
             // 
             YFirstMatrix.Location = new Point(151, 32);
-            YFirstMatrix.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            YFirstMatrix.Maximum = new decimal(new int[] { 6, 0, 0, 0 });
             YFirstMatrix.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             YFirstMatrix.Name = "YFirstMatrix";
             YFirstMatrix.Size = new Size(118, 23);
@@ -80,7 +80,7 @@
             // XFirstMatrix
             // 
             XFirstMatrix.Location = new Point(12, 32);
-            XFirstMatrix.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            XFirstMatrix.Maximum = new decimal(new int[] { 6, 0, 0, 0 });
             XFirstMatrix.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             XFirstMatrix.Name = "XFirstMatrix";
             XFirstMatrix.Size = new Size(118, 23);

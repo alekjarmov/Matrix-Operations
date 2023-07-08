@@ -4,7 +4,7 @@
     <_LastSelectedProfileId>C:\Users\AnaMarija Atanasoska\Desktop\Faks\Semestar 6\Vizuelno programiranje\proekt\Matrix-Operations\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="AdditionParameters.cs">
+    <Compile Update="Forms\AdditionParameters.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Form1.cs">
@@ -13,7 +13,22 @@
     <Compile Update="Forms\FormTypes\MatrixInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\FormTypes\ParameterForm.cs">
+    <Compile Update="Forms\GraphParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GraphVisualization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GraphVisualization.cs.BASE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GraphVisualization.cs.LOCAL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GraphVisualization.cs.REMOTE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\GraphVisualizationInput.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\MatrixAdditionInput.cs">

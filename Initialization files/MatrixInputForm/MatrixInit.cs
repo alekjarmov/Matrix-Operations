@@ -8,14 +8,66 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MatrixOperations.Initialization_files;
+using System.Drawing.Printing;
 
 namespace MatrixOperations
 {
     public static class MatrixInit
     {
         // Matrix generation
-        public static NumericUpDown[,] GenerateMatrix(MatrixInputForm form, int X, int Y,
-                                    int MarginX, int MarginY)
+        public static (NumericUpDown[,], Label[]) GenerateGraphVizMatrix(MatrixInputForm form, int X, int Y,
+                                    int MarginX, int MarginY, int Minimum, int Maximum)
+        {
+            NumericUpDown[,] numericUpDowns = new NumericUpDown[X, Y];
+            Label[] labels = new Label[X + Y];
+            System.Diagnostics.Debug.WriteLine("Console from graphviz");
+            for (var i = 0; i < X + 1; i++)
+            {
+                for (var j = 0; j < Y + 1; j++)
+                {
+                    if (i==0 && j==0)
+                    {
+                        continue;
+                    }
+                    else if (i != 0 && j == 0)
+                    {
+                        labels[i + j - 1] = new Label
+                        {
+                            Text = $"{i}"
+,
+                            Width = Variables.CharacterWidth,
+                            Top = MarginY + i * Variables.FieldsTotalHeight,
+                            Left = MarginX + j * Variables.FieldsTotalWidth + Variables.FieldsTotalWidth / 2
+                        };
+                        form.Controls.Add(labels[i + j - 1]);
+                    }
+                    else if (i == 0 && j != 0)
+                    {
+                        labels[Y + j - 1] = new Label();
+                        labels[Y + j - 1].Text = $"{j}";
+                        labels[Y + j - 1].Width = Variables.CharacterWidth;
+                        labels[Y + j - 1].Top = MarginY + i * Variables.FieldsTotalHeight;
+                        labels[Y + j - 1].Left = MarginX + j * Variables.FieldsTotalWidth + Variables.FieldsTotalWidth/2;
+                        form.Controls.Add(labels[Y + j - 1]);
+                    }
+                    else
+                    {
+                        numericUpDowns[i - 1, j - 1] = new NumericUpDown();
+                        numericUpDowns[i - 1, j - 1].Top = MarginY + i * Variables.FieldsTotalHeight;
+                        numericUpDowns[i - 1, j - 1].Left = MarginX + j * Variables.FieldsTotalWidth;
+                        numericUpDowns[i - 1, j - 1].Width = Variables.FieldsWidth;
+                        numericUpDowns[i - 1, j - 1].Minimum = Minimum;
+                        numericUpDowns[i - 1, j - 1].Maximum = Maximum;
+                        form.Controls.Add(numericUpDowns[i - 1, j - 1]);
+                    }
+
+                }
+            }
+
+            return (numericUpDowns, labels);
+        }
+        public static NumericUpDown[,] GenerateOperationMatrix(MatrixInputForm form, int X, int Y,
+                                    int MarginX, int MarginY, int Minimum, int Maximum)
         {
             NumericUpDown[,] numericUpDowns = new NumericUpDown[X, Y];
 
@@ -23,16 +75,35 @@ namespace MatrixOperations
             {
                 for (var j = 0; j < Y; j++)
                 {
+
                     numericUpDowns[i, j] = new NumericUpDown();
                     numericUpDowns[i, j].Top = MarginY + i * Variables.FieldsTotalHeight;
                     numericUpDowns[i, j].Left = MarginX + j * Variables.FieldsTotalWidth;
                     numericUpDowns[i, j].Width = Variables.FieldsWidth;
-                    numericUpDowns[i, j].Minimum = -10000;
+                    numericUpDowns[i, j].Minimum = Minimum;
+                    numericUpDowns[i, j].Maximum = Maximum;
                     form.Controls.Add(numericUpDowns[i, j]);
+
+
                 }
             }
 
             return numericUpDowns;
+        }
+        public static (NumericUpDown[,], Label[]) GenerateMatrix(MatrixInputForm form, int X, int Y,
+                                    int MarginX, int MarginY, int Minimum, int Maximum, bool InitializeHelperComponents = false)
+        {
+            NumericUpDown[,] numericUpDowns;
+            Label[]? labels = null; 
+            if(!InitializeHelperComponents)
+            {
+                (numericUpDowns, labels) = GenerateGraphVizMatrix(form, X, Y, MarginX, MarginY, Minimum, Maximum);
+            }
+            else
+            {
+                numericUpDowns = GenerateOperationMatrix(form, X, Y, MarginX, MarginY, Minimum, Maximum);
+            }
+            return (numericUpDowns, labels);
         }
         public static TextBox[,] GenerateDisabledTextBoxMatrix(MatrixInputForm form, int X, int Y,
                                     int MarginX, int MarginY)
@@ -82,7 +153,7 @@ namespace MatrixOperations
 
 
         // Generating the three matrices
-        private static NumericUpDown[,] GenerateFirstMatrix(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int CenterMarginYFirstMatrix)
+        private static NumericUpDown[,] GenerateFirstMatrix(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int CenterMarginYFirstMatrix, int Minimum, int Maximum, bool InitializeHelperComponents)
         {
             // <summary>
             // Generates the first matrix
@@ -93,10 +164,10 @@ namespace MatrixOperations
 
 
             return GenerateMatrix(form, XFirstMatrix, YFirstMatrix, MarginXForFirstMatrix,
-                MarginYForFirstMatrix);
+                MarginYForFirstMatrix, Minimum, Maximum, InitializeHelperComponents).Item1;
 
         }
-        private static NumericUpDown[,] GenerateSecondMatrix(this MatrixInputForm form, int XSecondMatrix, int YSecondMatrix, int YFirstMatrix, int CenterMarginYSecondMatrix)
+        private static NumericUpDown[,] GenerateSecondMatrix(this MatrixInputForm form, int XSecondMatrix, int YSecondMatrix, int YFirstMatrix, int CenterMarginYSecondMatrix, int Minimum, int Maximum)
         {
             // <summary>
             // Generates the second matrix 
@@ -106,7 +177,7 @@ namespace MatrixOperations
 
 
             return GenerateMatrix(form, XSecondMatrix, YSecondMatrix, MarginXForSecondMatrix,
-                MarginYForSecondMatrix);
+                MarginYForSecondMatrix, Minimum, Maximum).Item1;
 
         }
         private static TextBox[,] GenerateResultingMatrix(this MatrixInputForm form, int XResultantMatrix, int YResultantMatrix, int YFirstMatrix, int YSecondMatrix, int CenterMarginYResultMatrix)
@@ -155,7 +226,6 @@ namespace MatrixOperations
         }
         private static (Label, Label) GenerateSigns(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
         {
-            //int SignsY = GenerateSignsY(XFirstMatrix,XSecondMatrix);
             int PositionOperationY = GenerateOperationSignY(XFirstMatrix, XSecondMatrix);
             int PositionEqualsY = GenerateEqualsSignY(XFirstMatrix, XSecondMatrix);
             int PositionOperationX = GenerateOperationSignX(YFirstMatrix);
@@ -172,7 +242,8 @@ namespace MatrixOperations
 
 
         // Main generation method
-        public static (NumericUpDown[,], NumericUpDown[,], TextBox[,]) GenerateMatrices(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
+        public static (NumericUpDown[,], NumericUpDown[,], TextBox[,]) GenerateMatrices(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, 
+                                                                                        string? Sign, int Minimum, int Maximum, bool InitializeHelperComponents)
         {
             //<summary>
             // Generate the first operand matrix, the second operand matrix and the result matrix.
@@ -182,16 +253,18 @@ namespace MatrixOperations
 
             (int CenterMarginYFirstMatrix, int CenterMarginYSecondMatrix, int CenterMarginYResultMatrix) = GetCenteringMargins(XFirstMatrix, XSecondMatrix);
 
-            NumericUpDown[,] FirstMatrix = form.GenerateFirstMatrix(XFirstMatrix, YFirstMatrix, CenterMarginYFirstMatrix);
+            NumericUpDown[,] FirstMatrix = form.GenerateFirstMatrix(XFirstMatrix, YFirstMatrix, CenterMarginYFirstMatrix, Minimum, Maximum, InitializeHelperComponents);
 
-            NumericUpDown[,] SecondMatrix = form.GenerateSecondMatrix(XSecondMatrix, YSecondMatrix, YFirstMatrix, CenterMarginYSecondMatrix);
+            NumericUpDown[,] SecondMatrix = form.GenerateSecondMatrix(XSecondMatrix, YSecondMatrix, YFirstMatrix, CenterMarginYSecondMatrix, Minimum, Maximum);
 
             TextBox[,] ResultMatrix = form.GenerateResultingMatrix(XResultantMatrix, YResultantMatrix, YFirstMatrix, YSecondMatrix, CenterMarginYResultMatrix);
 
-
-            (Label Operation, Label Equals) = GenerateSigns(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
-            form.Controls.Add(Operation);
-            form.Controls.Add(Equals);
+            if (InitializeHelperComponents)
+            {
+                (Label Operation, Label Equals) = GenerateSigns(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
+                form.Controls.Add(Operation);
+                form.Controls.Add(Equals);
+            }
 
 
             return (FirstMatrix, SecondMatrix, ResultMatrix);

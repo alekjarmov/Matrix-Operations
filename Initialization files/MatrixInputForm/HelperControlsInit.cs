@@ -64,10 +64,10 @@ namespace MatrixOperations.Initialization_files
 
 
         // Button generation
-        public static Button GenerateButton(this MatrixInputForm form, int XFirstMatrix, int XSecondMatrix, string Text,EventHandler ClickMethod,int LeftOffset)
+        public static Button GenerateButton(this MatrixInputForm form, int XFirstMatrix, int XSecondMatrix, string Text,EventHandler ClickMethod,int LeftOffset, int AdditionalTopOffset = 0)
         {
             Button Button = new Button();
-            Button.Top = Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset;
+            Button.Top = Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset + AdditionalTopOffset;
             Button.Left = LeftOffset;
             Button.Text = Text;
             Button.Width = Variables.ButtonWidth;
