@@ -43,6 +43,10 @@ namespace MatrixOperations
                     MultiplicationParameters multiplicationParameters = new MultiplicationParameters();
                     multiplicationParameters.Show();
                     break;
+                case "graph visualization":
+                    GraphParameters graphParameters = new GraphParameters();
+                    graphParameters.Show();
+                    break;
             }
 
         }

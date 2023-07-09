@@ -20,14 +20,14 @@ namespace MatrixOperations
         {
             InitializeComponent();
 
-            InitializeInputEnvironment((int)XFirstMatrix, (int)YFirstMatrix, (int)XSecondMatrix, (int)YSecondMatrix, "*");
+            InitializeInputEnvironment((int)XFirstMatrix, (int)YFirstMatrix, (int)XSecondMatrix, (int)YSecondMatrix, Variables.NumericalUpDownMinimum, Variables.NumericalUpDownMaximum, "*");
             
         }
 
         
         
 
-        protected override async Task Animate(CancellationToken token)
+        protected override async Task ShowCalculation(CancellationToken token)
         {
             CalculateButton.Enabled = false;
             RandomizeButton.Enabled = false;

@@ -17,6 +17,7 @@ namespace MatrixOperations
         public AdditionParameters(string mode)
         {
             InitializeComponent();
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Mode = mode.ToLower();
             switch (Mode)
             {

@@ -48,7 +48,7 @@
             // 
             XFirstMatrix.BackColor = SystemColors.Window;
             XFirstMatrix.Location = new Point(15, 58);
-            XFirstMatrix.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            XFirstMatrix.Maximum = new decimal(new int[] { 6, 0, 0, 0 });
             XFirstMatrix.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             XFirstMatrix.Name = "XFirstMatrix";
             XFirstMatrix.Size = new Size(85, 23);
@@ -59,7 +59,7 @@
             // YFirstMatrix
             // 
             YFirstMatrix.Location = new Point(125, 58);
-            YFirstMatrix.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            YFirstMatrix.Maximum = new decimal(new int[] { 6, 0, 0, 0 });
             YFirstMatrix.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             YFirstMatrix.Name = "YFirstMatrix";
             YFirstMatrix.Size = new Size(85, 23);
@@ -70,7 +70,7 @@
             // XSecondMatrix
             // 
             XSecondMatrix.Location = new Point(15, 106);
-            XSecondMatrix.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            XSecondMatrix.Maximum = new decimal(new int[] { 6, 0, 0, 0 });
             XSecondMatrix.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             XSecondMatrix.Name = "XSecondMatrix";
             XSecondMatrix.Size = new Size(85, 23);
@@ -81,7 +81,7 @@
             // YSecondMatrix
             // 
             YSecondMatrix.Location = new Point(125, 106);
-            YSecondMatrix.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            YSecondMatrix.Maximum = new decimal(new int[] { 6, 0, 0, 0 });
             YSecondMatrix.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             YSecondMatrix.Name = "YSecondMatrix";
             YSecondMatrix.Size = new Size(85, 23);

@@ -22,12 +22,12 @@ namespace MatrixOperations.Forms
             
             Mode = mode.ToLower();
             string sign = mode == "addition" ? "+" : "-";
-            InitializeInputEnvironment((int)X, (int)Y, (int)X, (int)Y, sign);
+            InitializeInputEnvironment((int)X, (int)Y, (int)X, (int)Y,Variables.NumericalUpDownMinimum, Variables.NumericalUpDownMaximum ,sign);
 
 
         }
 
-        protected override async Task Animate(CancellationToken token)
+        protected override async Task ShowCalculation(CancellationToken token)
         {
             CalculateButton.Enabled = false;
             RandomizeButton.Enabled = false;

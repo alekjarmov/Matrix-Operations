@@ -25,7 +25,7 @@ namespace MatrixOperations.Forms.FormTypes
         protected TrackBar IterationSpeedPercentage;
         public MatrixInputForm()
         {
-
+            FormBorderStyle = FormBorderStyle.FixedSingle;
         }
         protected void EnableAllNumericUpDowns(bool Enable = true)
         {
@@ -73,32 +73,36 @@ namespace MatrixOperations.Forms.FormTypes
             }
 
         }
-        protected abstract Task Animate(CancellationToken token);
-        public void InitializeInputEnvironment(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, string Sign)
+        protected abstract Task ShowCalculation(CancellationToken token);
+        public void InitializeInputEnvironment(int XFirstMatrix, int YFirstMatrix, int XSecondMatrix, int YSecondMatrix, int Minimum, int Maximum, string? Sign, bool InitializeHelperComponents = true)
         {
             (this.XFirstMatrix, this.YFirstMatrix, this.XSecondMatrix, this.YSecondMatrix) = (XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix);
             this.Sign = Sign;
             Text = "Calculation Visualization";
             this.SetWidthAndHeight(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix);
 
-            (FirstMatrix, SecondMatrix, ResultantMatrix) = this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
+            (FirstMatrix, SecondMatrix, ResultantMatrix) = this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign, Minimum, Maximum, InitializeHelperComponents);
+            
             ResetColorNumericUpDowns();
             ResetResultantMatrix();
-            CalculateButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Calculate", StartAnimation, Variables.LeftOffset);
-            RandomizeButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Randomize", RandomizeInputs,
-                Variables.LeftOffset + Variables.ButtonsMarginLeft + CalculateButton.Width);
-            ClearButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Clear", GenerateAllInputs,
-                Variables.LeftOffset + 2 * Variables.ButtonsMarginLeft + 2 * CalculateButton.Width);
+            if (InitializeHelperComponents)
+            {
+                CalculateButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Calculate", StartCalculation, Variables.LeftOffset);
+                RandomizeButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Randomize", RandomizeInputs,
+                    Variables.LeftOffset + Variables.ButtonsMarginLeft + CalculateButton.Width);
+                ClearButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Clear", GenerateAllInputs,
+                    Variables.LeftOffset + 2 * Variables.ButtonsMarginLeft + 2 * CalculateButton.Width);
 
 
-            IterationSpeedPercentage = this.GenerateTrackBar(
-                Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset + CalculateButton.Height + Variables.ButtonsMarginBottom,
-                Variables.LeftOffset,
-                Variables.IterationPercentage,
-                UpdateIterationSpeed,
-                "Speed: ");
+                IterationSpeedPercentage = this.GenerateTrackBar(
+                    Math.Max(XFirstMatrix, XSecondMatrix) * Variables.FieldsTotalHeight + Variables.TopOffset + CalculateButton.Height + Variables.ButtonsMarginBottom,
+                    Variables.LeftOffset,
+                    Variables.IterationPercentage,
+                    UpdateIterationSpeed,
+                    "Speed: ");
 
-            this.GenerateLabels(YFirstMatrix, YSecondMatrix);
+                this.GenerateLabels(YFirstMatrix, YSecondMatrix);
+            }
         }
         public void UpdateIterationSpeed(object? sender, EventArgs e)
         {
@@ -121,9 +125,9 @@ namespace MatrixOperations.Forms.FormTypes
                 IterationToken.Cancel();
             IterationToken = null;
             Controls.Clear();
-            (FirstMatrix, SecondMatrix, ResultantMatrix) = this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign);
+            (FirstMatrix, SecondMatrix, ResultantMatrix) = this.GenerateMatrices(XFirstMatrix, YFirstMatrix, XSecondMatrix, YSecondMatrix, Sign, Variables.NumericalUpDownMinimum, Variables.NumericalUpDownMaximum, true);
 
-            CalculateButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Calculate", StartAnimation, Variables.LeftOffset);
+            CalculateButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Calculate", StartCalculation, Variables.LeftOffset);
             RandomizeButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Randomize", RandomizeInputs,
                 Variables.LeftOffset + Variables.ButtonsMarginLeft + CalculateButton.Width);
             ClearButton = this.GenerateButton(XFirstMatrix, XSecondMatrix, "Clear", GenerateAllInputs,
@@ -139,7 +143,7 @@ namespace MatrixOperations.Forms.FormTypes
             this.GenerateLabels(YFirstMatrix, YSecondMatrix);
 
         }
-        public async void StartAnimation(object? sender, EventArgs e)
+        public virtual async void StartCalculation(object? sender, EventArgs e)
         {
             CalculateButton.Enabled = false;
             RandomizeButton.Enabled = false;
@@ -148,12 +152,12 @@ namespace MatrixOperations.Forms.FormTypes
             EnableAllNumericUpDowns(false);
             IterationToken = new CancellationTokenSource();
 
-            await Animate(IterationToken.Token);
+            await ShowCalculation(IterationToken.Token);
 
-            EndAnimation();
+            EndCalculation();
 
         }
-        public void EndAnimation()
+        public virtual void EndCalculation()
         {
             CalculateButton.Enabled = true;
             RandomizeButton.Enabled = true;
