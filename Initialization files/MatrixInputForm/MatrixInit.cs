@@ -91,7 +91,7 @@ namespace MatrixOperations
             return numericUpDowns;
         }
         public static (NumericUpDown[,], Label[]) GenerateMatrix(MatrixInputForm form, int X, int Y,
-                                    int MarginX, int MarginY, int Minimum, int Maximum, bool InitializeHelperComponents = false)
+                                    int MarginX, int MarginY, int Minimum, int Maximum, bool InitializeHelperComponents = true)
         {
             NumericUpDown[,] numericUpDowns;
             Label[]? labels = null; 
