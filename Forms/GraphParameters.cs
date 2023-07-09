@@ -12,9 +12,12 @@ namespace MatrixOperations.Forms
 {
     public partial class GraphParameters : Form
     {
+        
         public GraphParameters()
         {
             InitializeComponent();
+            
+            
         }
         public void ContinueBtn_Click(object sender, EventArgs e)
         {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+
             labelMultiplictationDimensions = new Label();
             NumVerticles = new NumericUpDown();
             VerticlesInputBtn = new Button();

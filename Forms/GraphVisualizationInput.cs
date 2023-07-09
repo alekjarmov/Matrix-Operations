@@ -14,12 +14,28 @@ namespace MatrixOperations.Forms
 {
     public partial class GraphVisualizationInput : MatrixInputForm
     {
+        
         public GraphVisualizationInput(int NumberVerticles)
         {
             InitializeComponent();
             InitializeInputEnvironment(NumberVerticles,NumberVerticles,0,0,0,1, null, false);
+            DisableDiagonalNumericalUpDowns();
             SetNumericalUpDownsOnChange();
             this.GenerateButton(XFirstMatrix, 0, "Generate Graph", StartCalculation, Variables.LeftOffset, Variables.FieldsTotalHeight);
+            Label Title = new Label();
+            Title.Top = 20;
+            Title.Left = ClientSize.Width / 2;
+            Title.Text = "Input the Graph Matrix Representation";
+
+            Controls.Add(Title);
+        }
+
+        private void DisableDiagonalNumericalUpDowns()
+        {
+            for(int i=0;i<FirstMatrix.GetLength(0);i++)
+            {
+                FirstMatrix[i, i].Enabled = false;
+            }
         }
 
         public void SetNumericalUpDownsOnChange()

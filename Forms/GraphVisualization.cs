@@ -102,7 +102,7 @@ namespace MatrixOperations.Forms
             for (int index = 0; index < centersVerticles.Count; index++)
             {
                 Point point = centersVerticles[index];
-                Verticle verticle = new Verticle(point, Color.FromArgb(255, random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)), $"{index + 1}");
+                Verticle verticle = new Verticle(point, Color.FromArgb(255, random.Next(30, 255), random.Next(30, 255), random.Next(30, 255)), $"{index + 1}");
                 Verticles.Add(verticle);
             }
         }
