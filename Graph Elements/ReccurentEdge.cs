@@ -21,7 +21,7 @@ namespace MatrixOperations.Graph_Elements
         public void Draw(Graphics g)
         {
             Pen pen = new Pen(Verticle.Color, Thickness);
-            g.DrawEllipse(pen, Verticle.Position.X, (Verticle.Position.Y - 2*Verticle.RADIUS>0)? (Verticle.Position.Y - Verticle.RADIUS): (Verticle.Position.Y + Verticle.RADIUS), Verticle.RADIUS*2, Verticle.RADIUS*2);
+            g.DrawEllipse(pen, Verticle.Position.X, Verticle.Position.Y, 2*Verticle.RADIUS, 2*Verticle.RADIUS);
             pen.Dispose();
 
 

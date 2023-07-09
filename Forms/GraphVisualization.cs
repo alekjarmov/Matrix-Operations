@@ -19,7 +19,10 @@ namespace MatrixOperations.Forms
         int[,] Relations;
         List<Verticle> Verticles;
         List<IEdge> Edges;
-
+        public static int LeftMargin = 20;
+        public static int RightMargin = 20;
+        public static int TopMargin = 20;
+        public static int BottomMargin = 20;
         public GraphVisualization(int NumberPoints, int[,] Relations)
         {
             InitializeComponent();
@@ -45,7 +48,8 @@ namespace MatrixOperations.Forms
             List<Point> centersVerticles = new List<Point>();
             for (int i = 0; i < NumberPoints; i++)
             {
-                centersVerticles.Add(new Point(random.Next(0 + Verticle.RADIUS, ClientSize.Width - Verticle.RADIUS), random.Next(0 + Verticle.RADIUS, ClientSize.Height - Verticle.RADIUS)));
+                centersVerticles.Add(new Point(random.Next(0 + 2*Verticle.RADIUS + LeftMargin, ClientSize.Width - 2*Verticle.RADIUS - RightMargin), 
+                                                random.Next(0 + 2*Verticle.RADIUS + TopMargin, ClientSize.Height - 2*Verticle.RADIUS - BottomMargin)));
             }
             GenerateVerticles(centersVerticles);
         }
