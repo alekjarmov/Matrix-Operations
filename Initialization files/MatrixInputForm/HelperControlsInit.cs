@@ -73,6 +73,7 @@ namespace MatrixOperations.Initialization_files
             Button.Width = Variables.ButtonWidth;
             Button.Height = Variables.ButtonHeight;
             Button.Click += ClickMethod;
+            Button.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
 
             form.Controls.Add(Button);
             

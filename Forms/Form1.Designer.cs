@@ -63,9 +63,9 @@
             buttonShowOperation.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
             buttonShowOperation.Font = new Font("Showcard Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonShowOperation.ForeColor = SystemColors.ControlLight;
-            buttonShowOperation.Location = new Point(187, 18);
+            buttonShowOperation.Location = new Point(181, 18);
             buttonShowOperation.Name = "buttonShowOperation";
-            buttonShowOperation.Size = new Size(130, 125);
+            buttonShowOperation.Size = new Size(143, 125);
             buttonShowOperation.TabIndex = 3;
             buttonShowOperation.Text = "Show operation";
             buttonShowOperation.UseVisualStyleBackColor = false;
@@ -76,7 +76,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlDarkDark;
-            ClientSize = new Size(329, 155);
+            ClientSize = new Size(336, 155);
             Controls.Add(buttonShowOperation);
             Controls.Add(listBoxOptions);
             Controls.Add(label1);
