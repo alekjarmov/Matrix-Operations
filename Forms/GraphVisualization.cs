@@ -23,9 +23,14 @@ namespace MatrixOperations.Forms
         public static int RightMargin = 20;
         public static int TopMargin = 20;
         public static int BottomMargin = 20;
+
+        public bool dragStarted = false;
+        public Verticle draggingVerticle = null;
         public GraphVisualization(int NumberPoints, int[,] Relations)
         {
+
             InitializeComponent();
+            DoubleBuffered = true;
             this.NumberPoints = NumberPoints;
             this.Relations = Relations;
             InitializeGraph();
@@ -48,31 +53,32 @@ namespace MatrixOperations.Forms
             List<Point> centersVerticles = new List<Point>();
             for (int i = 0; i < NumberPoints; i++)
             {
-                centersVerticles.Add(new Point(random.Next(0 + 2*Verticle.RADIUS + LeftMargin, ClientSize.Width - 2*Verticle.RADIUS - RightMargin), 
-                                                random.Next(0 + 2*Verticle.RADIUS + TopMargin, ClientSize.Height - 2*Verticle.RADIUS - BottomMargin)));
+                centersVerticles.Add(new Point(random.Next(0 + 2 * Verticle.RADIUS + LeftMargin, ClientSize.Width - 2 * Verticle.RADIUS - RightMargin),
+                                                random.Next(0 + 2 * Verticle.RADIUS + TopMargin, ClientSize.Height - 2 * Verticle.RADIUS - BottomMargin)));
             }
             GenerateVerticles(centersVerticles);
         }
 
         private void GenerateEdges()
         {
-            for(int i=0; i<Relations.GetLength(0); i++)
+            Edges = new List<IEdge>();
+            for (int i = 0; i < Relations.GetLength(0); i++)
             {
                 for (int j = 0; j < Relations.GetLength(1); j++)
                 {
-                    if (i>j && Relations[i, j] == 1)
+                    if (i > j && Relations[i, j] == 1)
                     {
                         Verticle v1 = Verticles[i];
                         Verticle v2 = Verticles[j];
-                        Edges.Add(new Edge(v1.Position,v2.Position,v1, v2));
+                        Edges.Add(new Edge(v1.Position, v2.Position, v1, v2));
                     }
-                    else if (i==j && Relations[i, j] == 1)
+                    else if (i == j && Relations[i, j] == 1)
                     {
                         Edges.Add(new ReccurentEdge(Verticles[i]));
                     }
                 }
             }
-            
+
         }
 
         private void DrawVerticles(Graphics g)
@@ -93,10 +99,10 @@ namespace MatrixOperations.Forms
         private void GenerateVerticles(List<Point> centersVerticles)
         {
             Random random = new Random();
-            for(int index = 0; index<centersVerticles.Count;index++) 
+            for (int index = 0; index < centersVerticles.Count; index++)
             {
                 Point point = centersVerticles[index];
-                Verticle verticle = new Verticle(point, Color.FromArgb(255, random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)), $"{index+1}");
+                Verticle verticle = new Verticle(point, Color.FromArgb(255, random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)), $"{index + 1}");
                 Verticles.Add(verticle);
             }
         }
@@ -107,6 +113,45 @@ namespace MatrixOperations.Forms
             DrawVerticles(e.Graphics);
         }
 
-        
+        private void GraphVisualization_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!dragStarted)
+            {
+                Point MouseLocation = e.Location;
+
+                foreach (Verticle vert in Verticles)
+                {
+                    if ((MouseLocation.X - vert.Position.X) * (MouseLocation.X - vert.Position.X) + (MouseLocation.Y - vert.Position.Y) * (MouseLocation.Y - vert.Position.Y)
+                    <= Verticle.RADIUS * Verticle.RADIUS)
+                    {
+                        draggingVerticle = vert;
+                        dragStarted = true;
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void GraphVisualization_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragStarted)
+            {
+                draggingVerticle.Position = e.Location;
+                GenerateEdges();
+                Invalidate();
+            }
+        }
+
+        private void GraphVisualization_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (dragStarted)
+            {
+                dragStarted = false;
+                draggingVerticle.Position = e.Location;
+                GenerateEdges();
+                Invalidate();
+            }
+        }
     }
 }
