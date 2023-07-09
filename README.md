@@ -263,3 +263,6 @@ public static void SetWidthAndHeight(this MatrixInputForm form, int XFirstMatrix
 ![](https://github.com/alekjarmov/Matrix-Operations/blob/main/documentation/subtraction.gif)
 ### Множење
 ![](https://github.com/alekjarmov/Matrix-Operations/blob/main/documentation/multiplication.gif)
+### Визуелизација на граф
+![](https://i.imgur.com/GodJKwz.gif)
+
