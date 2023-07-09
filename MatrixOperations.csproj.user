@@ -19,15 +19,6 @@
     <Compile Update="Forms\GraphVisualization.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\GraphVisualization.cs.BASE.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\GraphVisualization.cs.LOCAL.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\GraphVisualization.cs.REMOTE.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Forms\GraphVisualizationInput.cs">
       <SubType>Form</SubType>
     </Compile>
