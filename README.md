@@ -6,7 +6,7 @@
 со што полесно може да се сфати како точно работат алгоритмите за извршување на одредени операции со матрици.
 
 ## Подржани операции
-![image](https://github.com/alekjarmov/Matrix-Operations/assets/6871971/df34e8dc-3b35-49a7-a5f4-7fd208814a7f)
+![image](https://github.com/alekjarmov/Matrix-Operations/assets/86167204/986fed9c-3321-4e67-a5c9-fcbed7bf15d0)
 
 На почеток на апликацијата е прикажано мени со подржаните операции со матрици. Корисникот треба да ја избере саканата операција и да притисне на копчето `SHOW OPERATION`.
 По притискање на копчето се преминува на бараниот алгоритам.
@@ -41,11 +41,16 @@ private void XSecondMatrix_ValueChanged(object sender, EventArgs e)
     YFirstMatrix.Value = XSecondMatrix.Value;
 }
 ```
+### Визуелизација на граф
+![image](https://github.com/alekjarmov/Matrix-Operations/assets/86167204/c6c09a30-1a93-4e02-8e8c-779a392764c8)
+
+Апликацијата поддржува и визуелизација на граф претставен со матрична репрезентација. За внесување на графот потребно е да се внесе бројот на темиња V кои ќе ги содржи графот и потоа се генерира матрица за внесување со димензии VxV.
+
 ### Општи забелешки
 На делот каде што се внесуваат двете матрици врз кои што сакаме да направиме една од операциите собирање, одземање или множење се понудени опции кои што треба да го подобрат искуството на корисникот, како на пример можноста да се избришат сите моментално внесени вредности или пак да се наполнат матриците со случајно генерирани вредности. Освен ова корисникот може да ја менува брзината на анимацијата која што го прикажува процесот за извршување на калкулација.
 
 ## Имплементација и податочни структури
-Апликацијата е составена од неколку форми, првата форма е иницијалната каде што бираме каква операција сакаме да направиме, додека пак следните форми се за внес за одредени информации потребни за бараната операција. Како главна податочна структура која што ја користиме е абстрактна форма која што треба да исцртува 2 матрици во кои што може да се внеусваат вредности за калкулација, како и трета матрица која што го претставува резултатот на операциите. Оваа абстрактна форма ја наследуваат формите за множење и собирање/делење. Има еднa форма за множење и една форма за собирање и делење, бидејќи кај собирање и одземање треба да бидат исти димензиите на двете форми-операнди може да се претстават во една форма, само плус оваа форма има променлива `Mode` која што ги зима вредностите "subtraction" или "addition" и само според тоа врши различна калкулација. Главната функција која што треба да се презапише е `Animate(CancellationToken token)`. Елементите кои што ги има абстрактната форма се следните:
+Апликацијата е составена од неколку форми, првата форма е иницијалната каде што бираме каква операција сакаме да направиме, додека пак следните форми се за внес за одредени информации потребни за бараната операција. Како главна податочна структура која што ја користиме е абстрактна форма која што треба да исцртува 2 матрици во кои што може да се внеусваат вредности за калкулација, како и трета матрица која што го претставува резултатот на операциите. Оваа апстрактна форма ја наследуваат формите за множење и собирање/делење. Има еднa форма за множење и една форма за собирање и делење, бидејќи кај собирање и одземање треба да бидат исти димензиите на двете форми-операнди може да се претстават во една форма, само плус оваа форма има променлива `Mode` која што ги зима вредностите "subtraction" или "addition" и само според тоа врши различна калкулација. Главната функција која што треба да се презапише е `ShowCalculation(CancellationToken token)`. Елементите кои што ги има абстрактната форма се следните:
 ```csharp
 public abstract partial class MatrixInputForm : Form
     {
@@ -65,9 +70,9 @@ public abstract partial class MatrixInputForm : Form
         }
         ...
 ```
-Функцијата `Animate()` во формата за собирање и одземање е имплементирана на следниот начин:
+Функцијата `ShowCalculation()` во формата за собирање и одземање е имплементирана на следниот начин:
 ```csharp
- protected override async Task Animate(CancellationToken token)
+ protected override async Task ShowCalculation(CancellationToken token)
         {
             CalculateButton.Enabled = false;
             RandomizeButton.Enabled = false;
@@ -106,9 +111,9 @@ public abstract partial class MatrixInputForm : Form
 
         }
 ```
-Додека пак функцијата `Animate()` во формата за множење е имплементирана на следниот начин:
+Додека пак функцијата `ShowCalculation()` во формата за множење е имплементирана на следниот начин:
 ```csharp
-protected override async Task Animate(CancellationToken token)
+protected override async Task ShowCalculation(CancellationToken token)
         {
             CalculateButton.Enabled = false;
             RandomizeButton.Enabled = false;
@@ -168,30 +173,26 @@ protected override async Task Animate(CancellationToken token)
 ```
 Методите и варијаблите за иницијализација на формата која ги прикажува влезните полиња се наоѓаат во директориумот `Initialization files/MatrixInputForm`. Во фајловите ни се потребни одредени глобални променливи кои се однесуваат на ширина, должина на дадени компоненти, маргини и слични други карактеристики. Овие променливи ни се дефинирани во статичката класа `Variables.cs`. Во статичката класа `MatrixInit` се наоѓаат методи за иницијализација на полињата за внес на вредности во матриците и знаците измеѓу нив. Една матрица од матриците кои учествуваат во операцијата се генерира на следниот начин:
 ```csharp
-public static NumericUpDown[,] GenerateMatrix(MatrixInputForm form, int X, int Y,
-                                    int MarginX, int MarginY)
+public static (NumericUpDown[,], Label[]) GenerateMatrix(MatrixInputForm form, int X, int Y,
+                                    int MarginX, int MarginY, int Minimum, int Maximum, bool InitializeHelperComponents = true)
         {
-            NumericUpDown[,] numericUpDowns = new NumericUpDown[X, Y];
-
-            for (var i = 0; i < X; i++)
+            NumericUpDown[,] numericUpDowns;
+            Label[]? labels = null; 
+            if(!InitializeHelperComponents)
             {
-                for (var j = 0; j < Y; j++)
-                {
-                    numericUpDowns[i, j] = new NumericUpDown();
-                    numericUpDowns[i, j].Top = MarginY + i * Variables.FieldsTotalHeight;
-                    numericUpDowns[i, j].Left = MarginX + j * Variables.FieldsTotalWidth;
-                    numericUpDowns[i, j].Width = Variables.FieldsWidth;
-                    numericUpDowns[i, j].Minimum = -10000;
-                    form.Controls.Add(numericUpDowns[i, j]);
-                }
+                (numericUpDowns, labels) = GenerateGraphVizMatrix(form, X, Y, MarginX, MarginY, Minimum, Maximum);
             }
-
-            return numericUpDowns;
+            else
+            {
+                numericUpDowns = GenerateOperationMatrix(form, X, Y, MarginX, MarginY, Minimum, Maximum);
+            }
+            return (numericUpDowns, labels);
         }
 ```
-За генерирање на резултантната матрица се користи слична функција `GenerateDisabledTextBoxMatrix` која прави матрица од `TextBox` полиња кои се disabled, користи код кој е сличен на претходниот само наместо користење на `NumericUpDown` типот се користи `TextBox` типот и наместо користење на атрибутот `Minimum` се поставува атрибутот `Enabled` на келијата на `false`. Функцијата `GenerateMatrix` подоцна се користи во соодветната функција за генерирање на матрица, како функцијата `GenerateFirstMatrix` која воедно пресметува маргина за првата матрицата и го повикува методот `GenerateMatrix` и функцијата `GenerateSecondMatrix` која соодветно пресметува маргина за втората матрица и го повикува методот `GenerateMatrix`. Функцијата `GenerateResultingMatrix` се однесува слично како претходно наведените функции, но ја повикува функцијата `GenerateDisabledTextBoxMatrix` наместо `GenerateMatrix`. Може да се види `GenerateFirstMatrix` во продолжение:
+При генерирање на една матрица треба да се наведе дали треба да се генерираат помошни компоненти, да се одреди вредноста на `InitializeHelperComponents`.Генерирањето помошни компоненти би значело дека матрицата ќе учествува во една од операциите множење, собирање и одземање, инаку би значело дека матрицата е потребна за визуелизација на граф. Во функциите `GenerateGraphVizMatrix` и `GenerateOperationMatrix` се генерира матрица од `NumericUpDown` полиња. Во `GenerateGraphVizMatrix` тие примаат вредности 0 и 1 и дополнително првата редица и колона се користат за лабели на соодветните редица/колона, да се означи поврзаност меѓу темињата. Тоа не е случај во `GenerateOperationMatrix` каде немаме лабели на колона/редицаи вредностите на полињата може да се движат од -10000 до 10000.
+За генерирање на резултантната матрица при операциите собирање, одземање и множење се користи слична функција `GenerateDisabledTextBoxMatrix` која прави матрица од `TextBox` полиња кои се disabled, користи код кој е сличен на претходниот само наместо користење на `NumericUpDown` типот се користи `TextBox` типот и наместо користење на атрибутот `Minimum` се поставува атрибутот `Enabled` на келијата на `false`. Функцијата `GenerateMatrix` подоцна се користи во соодветната функција за генерирање на матрица, како функцијата `GenerateFirstMatrix` која воедно пресметува маргина за првата матрицата и го повикува методот `GenerateMatrix` и функцијата `GenerateSecondMatrix` која соодветно пресметува маргина за втората матрица и го повикува методот `GenerateMatrix`. Функцијата `GenerateResultingMatrix` се однесува слично како претходно наведените функции, но ја повикува функцијата `GenerateDisabledTextBoxMatrix` наместо `GenerateMatrix`. Може да се види `GenerateFirstMatrix` во продолжение:
 ```csharp
-private static NumericUpDown[,] GenerateFirstMatrix(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int CenterMarginYFirstMatrix)
+private static NumericUpDown[,] GenerateFirstMatrix(this MatrixInputForm form, int XFirstMatrix, int YFirstMatrix, int CenterMarginYFirstMatrix, int Minimum, int Maximum, bool InitializeHelperComponents)
         {
             // <summary>
             // Generates the first matrix
@@ -202,7 +203,7 @@ private static NumericUpDown[,] GenerateFirstMatrix(this MatrixInputForm form, i
 
 
             return GenerateMatrix(form, XFirstMatrix, YFirstMatrix, MarginXForFirstMatrix,
-                MarginYForFirstMatrix);
+                MarginYForFirstMatrix, Minimum, Maximum, InitializeHelperComponents).Item1;
 
         }
 ```
@@ -246,6 +247,8 @@ public static void SetWidthAndHeight(this MatrixInputForm form, int XFirstMatrix
 
         }
 ```
+Функционалноста за визуелизација на граф генерира граф со ненасочени ребра и во матрицата полето `[i,j]` треба да се постави 0 доколку нема ребро меѓу темињата `i` и `j`, а 1 доколку има ребро. Во делот за изглед на апликацијата може да се види изгледот на оваа влезна матрица. При генерирање на визуелизацијата темињата добиваат случајни позиции и се во случајни бои, и нивната позиција може да се постави со овозможената drag and drop функционалност.
+
 ## Изглед/Приказ на апликацијата
 ### Собирање
 ![](https://github.com/alekjarmov/Matrix-Operations/blob/main/documentation/addition.gif)
